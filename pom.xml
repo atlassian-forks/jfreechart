@@ -10,7 +10,7 @@
 
     <artifactId>jfreechart</artifactId>
     <groupId>org.jfree</groupId>
-    <version>1.5.5</version>
+    <version>1.5.5-atlassian-1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <organization>
@@ -32,8 +32,8 @@
         <system>GitHub Issues</system>
     </issueManagement>
     <scm>
-        <connection>scm:git:git:https://github.com/jfree/jfreechart.git</connection>
-        <url>https://github.com/jfree/jfreechart</url>
+        <connection>scm:git:git:https://github.com/atlassian-forks/jfreechart.git</connection>
+        <url>https://github.com/atlassian-forks/jfreechart</url>
     </scm>
 
     <developers>
@@ -53,9 +53,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -79,11 +79,11 @@
     </dependencies>
 
     <distributionManagement>
-        <snapshotRepository>
-          <id>ossrh</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>    
+        <repository>
+            <id>atlassian-3rdparty</id>
+            <url>https://packages.atlassian.com/maven/3rdparty</url>
+        </repository>
+    </distributionManagement>
     
     <build>
         <testSourceDirectory>src/test/java</testSourceDirectory>
@@ -101,6 +101,28 @@
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>copy-license</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/META-INF</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>${user.dir}</directory>
+                                    <includes>
+                                        <include>licence-LGPL.txt</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -108,8 +130,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>21</source>
+                    <target>21</target>
                     <encoding>${project.build.sourceEncoding}</encoding>                
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
@@ -135,7 +157,7 @@
                 <version>3.7.0</version>
                 <configuration>
                     <linksource>true</linksource>
-                    <source>8</source>
+                    <source>21</source>
                     <docfilessubdirs>true</docfilessubdirs>
                 </configuration>
             </plugin>
@@ -192,8 +214,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.source.level>1.8</project.source.level>
-        <project.target.level>1.8</project.target.level>
+        <project.source.level>21</project.source.level>
+        <project.target.level>21</project.target.level>
     </properties>
 
     <profiles>
@@ -234,7 +256,7 @@
                         <version>3.7.0</version>
                         <configuration>
                             <linksource>true</linksource>
-                            <source>8</source>
+                            <source>21</source>
                             <docfilessubdirs>true</docfilessubdirs>
                         </configuration>
                         <executions>
