@@ -32,7 +32,7 @@
         <system>GitHub Issues</system>
     </issueManagement>
     <scm>
-        <connection>scm:git:git:https://github.com/atlassian-forks/jfreechart.git</connection>
+        <connection>scm:git:ssh://git@github.com:atlassian-forks/jfreechart.git</connection>
         <url>https://github.com/atlassian-forks/jfreechart</url>
     </scm>
 
