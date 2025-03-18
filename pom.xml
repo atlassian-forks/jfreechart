@@ -30,6 +30,7 @@
     </issueManagement>
     <scm>
         <connection>scm:git:ssh://git@github.com:atlassian-forks/jfreechart.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:atlassian-forks/jfreechart.git</developerConnection>
         <url>https://github.com/atlassian-forks/jfreechart</url>
       <tag>jfreechart-1.5.5-atlassian-1</tag>
   </scm>
