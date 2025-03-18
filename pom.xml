@@ -82,6 +82,10 @@
             <id>atlassian-3rdparty</id>
             <url>https://packages.atlassian.com/maven/3rdparty</url>
         </repository>
+        <snapshotRepository>
+            <id>atlassian-3rdparty-snapshot</id>
+            <url>https://packages.atlassian.com/maven/3rdparty-snapshot</url>
+        </snapshotRepository>
     </distributionManagement>
     
     <build>
