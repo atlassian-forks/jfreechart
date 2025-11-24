@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,11 +27,10 @@
  * ---------------
  * OHLCSeries.java
  * ---------------
- * (C) Copyright 2006-2022, by David Gilbert.
+ * (C) Copyright 2006-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.time.ohlc;
@@ -44,7 +43,7 @@ import org.jfree.data.time.RegularTimePeriod;
 /**
  * A list of ({@link RegularTimePeriod}, open, high, low, close) data items.
  *
- * @since 1.0.4
+ * @param <S> the series key type.
  *
  * @see OHLCSeriesCollection
  */

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * -----------------------
  * StandardChartTheme.java
  * -----------------------
- * (C) Copyright 2008-2022, by David Gilbert.
+ * (C) Copyright 2008-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -76,16 +76,8 @@ import org.jfree.chart.plot.SpiderWebPlot;
 import org.jfree.chart.plot.ThermometerPlot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.AbstractRenderer;
-import org.jfree.chart.renderer.category.BarPainter;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
-import org.jfree.chart.renderer.category.GradientBarPainter;
-import org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
-import org.jfree.chart.renderer.category.StatisticalBarRenderer;
-import org.jfree.chart.renderer.xy.GradientXYBarPainter;
-import org.jfree.chart.renderer.xy.XYBarPainter;
-import org.jfree.chart.renderer.xy.XYBarRenderer;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.renderer.category.*;
+import org.jfree.chart.renderer.xy.*;
 import org.jfree.chart.title.CompositeTitle;
 import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.legend.PaintScaleLegend;
@@ -188,7 +180,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     private transient Paint itemLabelPaint;
 
     /**
-     * A flag that controls whether or not shadows are visible (for example,
+     * A flag that controls whether shadows are visible (for example,
      * in a bar renderer).
      */
     private boolean shadowVisible;
@@ -327,8 +319,8 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         this.crosshairPaint = Color.BLUE;
         this.axisLabelPaint = Color.DARK_GRAY;
         this.tickLabelPaint = Color.DARK_GRAY;
-        this.barPainter = new GradientBarPainter();
-        this.xyBarPainter = new GradientXYBarPainter();
+        this.barPainter = new StandardBarPainter();
+        this.xyBarPainter = new StandardXYBarPainter();
         this.shadowVisible = false;
         this.shadowPaint = Color.GRAY;
         this.itemLabelPaint = Color.BLACK;

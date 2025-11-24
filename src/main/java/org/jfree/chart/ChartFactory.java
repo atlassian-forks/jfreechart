@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * -----------------
  * ChartFactory.java
  * -----------------
- * (C) Copyright 2001-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2001-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Serge V. Grachov;
@@ -39,84 +39,29 @@
  *                   David Browning (for Australian Institute of Marine
  *                       Science);
  *                   Benoit Xhenseval;
- * 
  */
 
 package org.jfree.chart;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.text.DateFormat;
-import java.text.NumberFormat;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-
+import org.jfree.chart.api.Layer;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.api.TableOrder;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator;
-import org.jfree.chart.labels.HighLowItemLabelGenerator;
-import org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
-import org.jfree.chart.labels.ItemLabelAnchor;
-import org.jfree.chart.labels.ItemLabelPosition;
-import org.jfree.chart.labels.PieToolTipGenerator;
-import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
-import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
-import org.jfree.chart.labels.StandardPieToolTipGenerator;
-import org.jfree.chart.labels.StandardXYToolTipGenerator;
-import org.jfree.chart.labels.StandardXYZToolTipGenerator;
-import org.jfree.chart.labels.XYToolTipGenerator;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.Marker;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.labels.*;
+import org.jfree.chart.plot.*;
 import org.jfree.chart.plot.pie.MultiplePiePlot;
 import org.jfree.chart.plot.pie.PiePlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.PolarPlot;
-import org.jfree.chart.plot.RingPlot;
-import org.jfree.chart.plot.ValueMarker;
-import org.jfree.chart.plot.WaferMapPlot;
-import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.DefaultPolarItemRenderer;
 import org.jfree.chart.renderer.WaferMapRenderer;
-import org.jfree.chart.renderer.category.AreaRenderer;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
-import org.jfree.chart.renderer.category.GanttRenderer;
-import org.jfree.chart.renderer.category.GradientBarPainter;
-import org.jfree.chart.renderer.category.LineAndShapeRenderer;
-import org.jfree.chart.renderer.category.StackedAreaRenderer;
-import org.jfree.chart.renderer.category.StackedBarRenderer;
-import org.jfree.chart.renderer.category.StandardBarPainter;
-import org.jfree.chart.renderer.category.WaterfallBarRenderer;
-import org.jfree.chart.renderer.xy.CandlestickRenderer;
-import org.jfree.chart.renderer.xy.GradientXYBarPainter;
-import org.jfree.chart.renderer.xy.HighLowRenderer;
-import org.jfree.chart.renderer.xy.StackedXYAreaRenderer2;
-import org.jfree.chart.renderer.xy.StandardXYBarPainter;
-import org.jfree.chart.renderer.xy.WindItemRenderer;
-import org.jfree.chart.renderer.xy.XYAreaRenderer;
-import org.jfree.chart.renderer.xy.XYBarRenderer;
-import org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer;
-import org.jfree.chart.renderer.xy.XYBubbleRenderer;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.chart.renderer.xy.XYStepAreaRenderer;
-import org.jfree.chart.renderer.xy.XYStepRenderer;
-import org.jfree.chart.title.TextTitle;
-import org.jfree.chart.api.Layer;
-import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.renderer.category.*;
+import org.jfree.chart.renderer.xy.*;
 import org.jfree.chart.text.TextAnchor;
-import org.jfree.chart.urls.PieURLGenerator;
-import org.jfree.chart.urls.StandardCategoryURLGenerator;
-import org.jfree.chart.urls.StandardPieURLGenerator;
-import org.jfree.chart.urls.StandardXYURLGenerator;
-import org.jfree.chart.urls.StandardXYZURLGenerator;
-import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.internal.Args;
-import org.jfree.chart.api.TableOrder;
+import org.jfree.chart.title.TextTitle;
+import org.jfree.chart.urls.*;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -124,12 +69,14 @@ import org.jfree.data.general.PieDataset;
 import org.jfree.data.general.WaferMapDataset;
 import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerXYDataset;
-import org.jfree.data.xy.IntervalXYDataset;
-import org.jfree.data.xy.OHLCDataset;
-import org.jfree.data.xy.TableXYDataset;
-import org.jfree.data.xy.WindDataset;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYZDataset;
+import org.jfree.data.xy.*;
+
+import java.awt.*;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * A collection of utility methods for creating some standard charts with
@@ -139,6 +86,10 @@ public abstract class ChartFactory {
 
     /** The chart theme. */
     private static ChartTheme currentTheme = new StandardChartTheme("JFree");
+
+    private ChartFactory() {
+        // no requirement to instantiate
+    }
 
     /**
      * Returns the current chart theme used by the factory.
@@ -168,15 +119,8 @@ public abstract class ChartFactory {
         // here we do a check to see if the user is installing the "Legacy"
         // theme, and reset the bar painters in that case...
         if (theme instanceof StandardChartTheme) {
-            StandardChartTheme sct = (StandardChartTheme) theme;
-            if (sct.getName().equals("Legacy")) {
-                BarRenderer.setDefaultBarPainter(new StandardBarPainter());
-                XYBarRenderer.setDefaultBarPainter(new StandardXYBarPainter());
-            }
-            else {
-                BarRenderer.setDefaultBarPainter(new GradientBarPainter());
-                XYBarRenderer.setDefaultBarPainter(new GradientXYBarPainter());
-            }
+            BarRenderer.setDefaultBarPainter(new StandardBarPainter());
+            XYBarRenderer.setDefaultBarPainter(new StandardXYBarPainter());
         }
     }
 
@@ -188,7 +132,7 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param locale  the locale ({@code null} not permitted).
      *
@@ -233,7 +177,7 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -286,7 +230,7 @@ public abstract class ChartFactory {
      *                               required to reach top scale.
      * @param greenForIncrease  an increase since previousDataset will be
      *                          displayed in green (decrease red) if true.
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param locale  the locale ({@code null} not permitted).
      * @param subTitle displays a subtitle with colour scheme if true
@@ -295,36 +239,34 @@ public abstract class ChartFactory {
      *
      * @return A pie chart.
      */
-    public static JFreeChart createPieChart(String title, PieDataset dataset,
-            PieDataset previousDataset, int percentDiffForMaxScale,
+    public static JFreeChart createPieChart(String title, PieDataset<String> dataset,
+            PieDataset<String> previousDataset, int percentDiffForMaxScale,
             boolean greenForIncrease, boolean legend, boolean tooltips,
             Locale locale, boolean subTitle, boolean showDifference) {
 
-        PiePlot plot = new PiePlot(dataset);
-        plot.setLabelGenerator(new StandardPieSectionLabelGenerator(locale));
+        PiePlot<String> plot = new PiePlot<>(dataset);
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator<>(locale));
         plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
 
         if (tooltips) {
-            plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator<>(locale));
         }
 
-        List keys = dataset.getKeys();
-        DefaultPieDataset series = null;
+        List<String> keys = dataset.getKeys();
+        DefaultPieDataset<String> series = null;
         if (showDifference) {
-            series = new DefaultPieDataset();
+            series = new DefaultPieDataset<>();
         }
 
         double colorPerPercent = 255.0 / percentDiffForMaxScale;
-        for (Iterator it = keys.iterator(); it.hasNext();) {
-            Comparable key = (Comparable) it.next();
+        for (String key : keys) {
             Number newValue = dataset.getValue(key);
             Number oldValue = previousDataset.getValue(key);
 
             if (oldValue == null) {
                 if (greenForIncrease) {
                     plot.setSectionPaint(key, Color.GREEN);
-                }
-                else {
+                } else {
                     plot.setSectionPaint(key, Color.RED);
                 }
                 if (showDifference) {
@@ -404,7 +346,7 @@ public abstract class ChartFactory {
      *                               required to reach top scale.
      * @param greenForIncrease  an increase since previousDataset will be
      *                          displayed in green (decrease red) if true.
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      * @param subTitle displays a subtitle with colour scheme if true
@@ -413,39 +355,37 @@ public abstract class ChartFactory {
      *
      * @return A pie chart.
      */
-    public static JFreeChart createPieChart(String title, PieDataset dataset,
-            PieDataset previousDataset, int percentDiffForMaxScale,
+    public static JFreeChart createPieChart(String title, PieDataset<String> dataset,
+            PieDataset<String> previousDataset, int percentDiffForMaxScale,
             boolean greenForIncrease, boolean legend, boolean tooltips, 
             boolean urls, boolean subTitle, boolean showDifference) {
 
-        PiePlot plot = new PiePlot(dataset);
-        plot.setLabelGenerator(new StandardPieSectionLabelGenerator());
+        PiePlot<String> plot = new PiePlot<>(dataset);
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator<>());
         plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
 
         if (tooltips) {
-            plot.setToolTipGenerator(new StandardPieToolTipGenerator());
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator<>());
         }
         if (urls) {
             plot.setURLGenerator(new StandardPieURLGenerator());
         }
 
-        List keys = dataset.getKeys();
-        DefaultPieDataset series = null;
+        List<String> keys = dataset.getKeys();
+        DefaultPieDataset<String> series = null;
         if (showDifference) {
             series = new DefaultPieDataset();
         }
 
         double colorPerPercent = 255.0 / percentDiffForMaxScale;
-        for (Iterator it = keys.iterator(); it.hasNext();) {
-            Comparable key = (Comparable) it.next();
+        for (String key : keys) {
             Number newValue = dataset.getValue(key);
             Number oldValue = previousDataset.getValue(key);
 
             if (oldValue == null) {
                 if (greenForIncrease) {
                     plot.setSectionPaint(key, Color.GREEN);
-                }
-                else {
+                } else {
                     plot.setSectionPaint(key, Color.RED);
                 }
                 if (showDifference) {
@@ -481,8 +421,7 @@ public abstract class ChartFactory {
             plot.setDataset(series);
         }
 
-        JFreeChart chart =  new JFreeChart(title,
-                JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
+        JFreeChart chart =  new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend);
 
         if (subTitle) {
             TextTitle subtitle = new TextTitle("Bright " + (greenForIncrease 
@@ -504,7 +443,7 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param locale  the locale ({@code null} not permitted).
      *
@@ -533,7 +472,7 @@ public abstract class ChartFactory {
      *
      * @param title  the chart title ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -640,7 +579,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} not permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -728,7 +667,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the orientation of the chart (horizontal or
      *                     vertical) ({@code null} not permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -800,7 +739,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation ({@code null} not
      *                     permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -875,7 +814,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} not permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -947,7 +886,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the chart orientation (horizontal or vertical)
      *                     ({@code null} not permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1017,7 +956,7 @@ public abstract class ChartFactory {
      * @param dateAxisLabel  the label for the date axis
      *                       ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1066,7 +1005,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1187,7 +1126,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1264,7 +1203,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1350,7 +1289,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1421,7 +1360,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1489,7 +1428,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1545,7 +1484,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1609,7 +1548,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the plot orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1688,7 +1627,7 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  a label for the value axis ({@code null}
      *                        permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1738,7 +1677,7 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  a label for the value axis ({@code null}
      *                        permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      *
      * @return A candlestick chart.
      */
@@ -1766,7 +1705,7 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  a label for the value axis ({@code null}
      *                        permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      *
      * @return A high-low-open-close chart.
      */
@@ -1817,7 +1756,7 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      * @param orientation  the orientation (horizontal or vertical)
      *                     ({@code null} NOT permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
@@ -1859,8 +1798,8 @@ public abstract class ChartFactory {
      * axes are {@link NumberAxis} instances.
      *
      * @param title  the chart title ({@code null} permitted).
-     * @param xAxisLabel  the x axis label ({@code null} permitted).
-     * @param yAxisLabel  the y axis label ({@code null} permitted).
+     * @param xAxisLabel  the x-axis label ({@code null} permitted).
+     * @param yAxisLabel  the y-axis label ({@code null} permitted).
      * @param dataset  the dataset ({@code null} permitted).
      * 
      * @return A chart.
@@ -1927,7 +1866,7 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  a label for the value axis ({@code null}
      *     permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      *
      * @return A box and whisker chart.
      */
@@ -1959,7 +1898,7 @@ public abstract class ChartFactory {
      * @param valueAxisLabel  a label for the value axis ({@code null}
      *                        permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
+     * @param legend  a flag specifying whether a legend is required.
      *
      * @return A box and whisker chart.
      */
@@ -1986,12 +1925,11 @@ public abstract class ChartFactory {
      * @param xAxisLabel  a label for the x-axis ({@code null} permitted).
      * @param yAxisLabel  a label for the y-axis ({@code null} permitted).
      * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag that controls whether or not a legend is created.
+     * @param legend  a flag that controls whether a legend is created.
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
      * @return A wind plot.
-     *
      */
     public static JFreeChart createWindPlot(String title, String xAxisLabel,
             String yAxisLabel, WindDataset dataset, boolean legend,

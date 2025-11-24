@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ----------
  * Title.java
  * ----------
- * (C) Copyright 2000-2021, by David Berry and Contributors.
+ * (C) Copyright 2000-present, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert;
@@ -87,7 +87,7 @@ public abstract class Title extends AbstractBlock
     public static final RectangleInsets DEFAULT_PADDING = new RectangleInsets(
             1, 1, 1, 1);
 
-    /** A flag that controls whether or not the title is visible. */
+    /** A flag that controls whether the title is visible. */
     public boolean visible;
 
     /** The title position. */
@@ -164,7 +164,7 @@ public abstract class Title extends AbstractBlock
     }
 
     /**
-     * Returns a flag that controls whether or not the title should be
+     * Returns a flag that controls whether the title should be
      * drawn.  The default value is {@code true}.
      *
      * @return A boolean.
@@ -176,7 +176,7 @@ public abstract class Title extends AbstractBlock
     }
 
     /**
-     * Sets a flag that controls whether or not the title should be drawn, and
+     * Sets a flag that controls whether the title should be drawn, and
      * sends a {@link TitleChangeEvent} to all registered listeners.
      *
      * @param visible  the new flag value.
@@ -260,7 +260,7 @@ public abstract class Title extends AbstractBlock
     }
 
     /**
-     * Returns the flag that indicates whether or not the notification
+     * Returns the flag that indicates whether the notification
      * mechanism is enabled.
      *
      * @return The flag.
@@ -270,7 +270,7 @@ public abstract class Title extends AbstractBlock
     }
 
     /**
-     * Sets the flag that indicates whether or not the notification mechanism
+     * Sets the flag that indicates whether the notification mechanism
      * is enabled.  There are certain situations (such as cloning) where you
      * want to turn notification off temporarily.
      *

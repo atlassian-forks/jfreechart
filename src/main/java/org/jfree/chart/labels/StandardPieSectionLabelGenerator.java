@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * -------------------------------------
  * StandardPieSectionLabelGenerator.java
  * -------------------------------------
- * (C) Copyright 2004-2022, by David Gilbert.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -58,10 +58,12 @@ import org.jfree.data.general.PieDataset;
  * {1} for the absolute section value and {2} for the percent amount of the pie
  * section, e.g. {@code "{0} = {1} ({2})"} will display as
  * {@code apple = 120 (5%)}.
+ *
+ * @param <K> the dataset key type.
  */
-public class StandardPieSectionLabelGenerator
-        extends AbstractPieItemLabelGenerator
-        implements PieSectionLabelGenerator, Cloneable, PublicCloneable,
+public class StandardPieSectionLabelGenerator<K extends Comparable<K>>
+        extends AbstractPieItemLabelGenerator<K>
+        implements PieSectionLabelGenerator<K>, Cloneable, PublicCloneable,
                    Serializable {
 
     /** For serialization. */
@@ -74,7 +76,7 @@ public class StandardPieSectionLabelGenerator
      * An optional map between item indices (Integer) and attributed labels 
      * (instances of AttributedString).
      */
-    private Map attributedLabels;
+    private Map<Integer, AttributedString> attributedLabels;
 
     /**
      * Creates a new section label generator using
@@ -130,7 +132,7 @@ public class StandardPieSectionLabelGenerator
     public StandardPieSectionLabelGenerator(String labelFormat,
             NumberFormat numberFormat, NumberFormat percentFormat) {
         super(labelFormat, numberFormat, percentFormat);
-        this.attributedLabels = new HashMap();
+        this.attributedLabels = new HashMap<>();
     }
 
     /**
@@ -142,7 +144,7 @@ public class StandardPieSectionLabelGenerator
      * @return The attributed label.
      */
     public AttributedString getAttributedLabel(int section) {
-        return (AttributedString) this.attributedLabels.get(section);
+        return this.attributedLabels.get(section);
     }
 
     /**
@@ -164,7 +166,7 @@ public class StandardPieSectionLabelGenerator
      * @return The label (possibly {@code null}).
      */
     @Override
-    public String generateSectionLabel(PieDataset dataset, Comparable key) {
+    public String generateSectionLabel(PieDataset<K> dataset, K key) {
         return super.generateSectionLabel(dataset, key);
     }
 
@@ -196,8 +198,8 @@ public class StandardPieSectionLabelGenerator
      * @return An attributed label (possibly {@code null}).
      */
     @Override
-    public AttributedString generateAttributedSectionLabel(PieDataset dataset,
-            Comparable key) {
+    public AttributedString generateAttributedSectionLabel(PieDataset<K> dataset,
+            K key) {
         return getAttributedLabel(dataset.getIndex(key));
     }
 
@@ -216,8 +218,8 @@ public class StandardPieSectionLabelGenerator
         if (!(obj instanceof StandardPieSectionLabelGenerator)) {
             return false;
         }
-        StandardPieSectionLabelGenerator that
-                = (StandardPieSectionLabelGenerator) obj;
+        StandardPieSectionLabelGenerator<?> that
+                = (StandardPieSectionLabelGenerator<?>) obj;
         if (!this.attributedLabels.equals(that.attributedLabels)) {
             return false;
         }
@@ -240,9 +242,9 @@ public class StandardPieSectionLabelGenerator
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        StandardPieSectionLabelGenerator clone 
-                = (StandardPieSectionLabelGenerator) super.clone();        
-        clone.attributedLabels = new HashMap();
+        StandardPieSectionLabelGenerator<?> clone
+                = (StandardPieSectionLabelGenerator<?>) super.clone();
+        clone.attributedLabels = new HashMap<>();
         clone.attributedLabels.putAll(this.attributedLabels);
         return clone;
     }

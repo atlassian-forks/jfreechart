@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------------------
  * RendererChangeDetector.java
  * ---------------------------
- * (C) Copyright 2003-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -44,12 +44,12 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 
 /**
- * A simple class for detecting whether or not a renderer has generated
+ * A simple class for detecting whether a renderer has generated
  * a {@link RendererChangeEvent}.
  */
 public class RendererChangeDetector implements RendererChangeListener {
 
-    /** A flag that records whether or not a change event has been received. */
+    /** A flag that records whether a change event has been received. */
     private boolean notified;
 
     /**
@@ -60,7 +60,7 @@ public class RendererChangeDetector implements RendererChangeListener {
     }
 
     /**
-     * Returns the flag that indicates whether or not a change event has been
+     * Returns the flag that indicates whether a change event has been
      * received.
      *
      * @return The flag.
@@ -70,7 +70,7 @@ public class RendererChangeDetector implements RendererChangeListener {
     }
 
     /**
-     * Sets the flag that indicates whether or not a change event has been
+     * Sets the flag that indicates whether a change event has been
      * received.
      *
      * @param notified  the new value of the flag.

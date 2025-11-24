@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ------------------------
  * PieToolTipGenerator.java
  * ------------------------
- * (C) Copyright 2001-2022, by David Gilbert.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -40,9 +40,11 @@ import org.jfree.data.general.PieDataset;
 
 /**
  * A tool tip generator that is used by the
- * {@link org.jfree.chart.plot.PiePlot} class.
+ * {@link org.jfree.chart.plot.pie.PiePlot} class.
+ *
+ * @param <K> the dataset key type.
  */
-public interface PieToolTipGenerator {
+public interface PieToolTipGenerator<K extends Comparable<K>> {
 
     /**
      * Generates a tool tip text item for the specified item in the dataset.
@@ -54,6 +56,6 @@ public interface PieToolTipGenerator {
      *
      * @return The tool tip text (possibly {@code null}).
      */
-    String generateToolTip(PieDataset dataset, Comparable key);
+    String generateToolTip(PieDataset<K> dataset, K key);
 
 }

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * --------------------
  * ItemLabelAnchor.java
  * --------------------
- * (C) Copyright 2003-2022, by David Gilbert.
+ * (C) Copyright 2003-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -115,6 +115,27 @@ public enum ItemLabelAnchor {
     OUTSIDE11,
 
     /** 12 o'clock  anchor point. */
-    OUTSIDE12
+    OUTSIDE12;
 
+    /**
+     * Returns {@code true} if this anchor point is inside an area.
+     *
+     * @return {@code true} if this anchor point is inside an area,
+     *         {@code false} otherwise.
+     */
+    public boolean isInternal() {
+        return this == CENTER
+                || this == INSIDE1
+                || this == INSIDE2
+                || this == INSIDE3
+                || this == INSIDE4
+                || this == INSIDE5
+                || this == INSIDE6
+                || this == INSIDE7
+                || this == INSIDE8
+                || this == INSIDE9
+                || this == INSIDE10
+                || this == INSIDE11
+                || this == INSIDE12;
+    }
 }

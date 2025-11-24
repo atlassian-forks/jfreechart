@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------------------
  * XYLineAndShapeRenderer.java
  * ---------------------------
- * (C) Copyright 2004-2021, by David Gilbert.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -86,7 +86,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private static final long serialVersionUID = -7435246895986425885L;
 
     /**
-     * A table of flags that control (per series) whether or not lines are
+     * A table of flags that control (per series) whether lines are
      * visible.
      */
     private Map<Integer, Boolean> seriesLinesVisibleMap;
@@ -98,7 +98,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private transient Shape legendLine;
 
     /**
-     * A table of flags that control (per series) whether or not shapes are
+     * A table of flags that control (per series) whether shapes are
      * visible.
      */
     private Map<Integer, Boolean> seriesShapesVisibleMap;
@@ -107,7 +107,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private boolean defaultShapesVisible;
 
     /**
-     * A table of flags that control (per series) whether or not shapes are
+     * A table of flags that control (per series) whether shapes are
      * filled.
      */
     private Map<Integer, Boolean> seriesShapesFilledMap;
@@ -131,7 +131,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private boolean useOutlinePaint;
 
     /**
-     * A flag that controls whether or not each series is drawn as a single
+     * A flag that controls whether each series is drawn as a single
      * path.
      */
     private boolean drawSeriesLineAsPath;
@@ -169,7 +169,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not each series is drawn as a
+     * Returns a flag that controls whether each series is drawn as a
      * single path.  The default value is {@code false}.
      *
      * @return A boolean.
@@ -181,7 +181,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not each series is drawn as a
+     * Sets the flag that controls whether each series is drawn as a
      * single path and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
@@ -211,7 +211,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     // LINES VISIBLE
 
     /**
-     * Returns the flag used to control whether or not the shape for an item is
+     * Returns the flag used to control whether the shape for an item is
      * visible.
      *
      * @param series  the series index (zero-based).
@@ -228,7 +228,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag used to control whether or not the lines for a series
+     * Returns the flag used to control whether the lines for a series
      * are visible.
      *
      * @param series  the series index (zero-based).
@@ -320,7 +320,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     // SHAPES VISIBLE
 
     /**
-     * Returns the flag used to control whether or not the shape for an item is
+     * Returns the flag used to control whether the shape for an item is
      * visible.
      * <p>
      * The default implementation passes control to the
@@ -341,7 +341,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag used to control whether or not the shapes for a series
+     * Returns the flag used to control whether the shapes for a series
      * are visible.
      *
      * @param series  the series index (zero-based).
@@ -408,7 +408,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     // SHAPES FILLED
 
     /**
-     * Returns the flag used to control whether or not the shape for an item
+     * Returns the flag used to control whether the shape for an item
      * is filled.
      * <p>
      * The default implementation passes control to the
@@ -430,7 +430,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the flag used to control whether or not the shapes for a series
+     * Returns the flag used to control whether the shapes for a series
      * are filled.
      *
      * @param series  the series index (zero-based).

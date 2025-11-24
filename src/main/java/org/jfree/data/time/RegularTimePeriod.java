@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ----------------------
  * RegularTimePeriod.java
  * ----------------------
- * (C) Copyright 2001-2022, by David Gilbert.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -53,12 +53,17 @@ import org.jfree.chart.date.MonthConstants;
  * <P>
  * This class is immutable, and all subclasses should be immutable also.
  */
-public abstract class RegularTimePeriod implements TimePeriod, Comparable,
-        MonthConstants {
+public abstract class RegularTimePeriod implements TimePeriod, MonthConstants {
 
     private static final AtomicReference<Calendar> calendarPrototype = new AtomicReference<>();
 
     private static final ThreadLocal<Calendar> threadLocalCalendar = new ThreadLocal<>();
+
+    /**
+     * Creates a new default instance.
+     */
+    protected RegularTimePeriod() {
+    }
 
     /**
      * Creates a time period that includes the specified millisecond, assuming
@@ -71,12 +76,12 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      *
      * @return The time period.
      */
-    public static RegularTimePeriod createInstance(Class c, Date millisecond,
+    public static RegularTimePeriod createInstance(Class<? extends TimePeriod> c, Date millisecond,
             TimeZone zone, Locale locale) {
         RegularTimePeriod result = null;
         try {
-            Constructor constructor = c.getDeclaredConstructor(
-                    new Class[] {Date.class, TimeZone.class, Locale.class});
+            Constructor<? extends TimePeriod> constructor = c.getDeclaredConstructor(
+                    Date.class, TimeZone.class, Locale.class);
             result = (RegularTimePeriod) constructor.newInstance(
                     new Object[] {millisecond, zone, locale});
         }
@@ -94,7 +99,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      *
      * @return A class.
      */
-    public static Class downsize(Class c) {
+    public static Class<? extends TimePeriod> downsize(Class<? extends TimePeriod> c) {
         if (c.equals(Year.class)) {
             return Quarter.class;
         }

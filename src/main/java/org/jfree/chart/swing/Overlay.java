@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ------------
  * Overlay.java
  * ------------
- * (C) Copyright 2009-2022, by David Gilbert.
+ * (C) Copyright 2009-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -69,7 +69,7 @@ public interface Overlay {
      * 
      * @param listener  the listener ({@code null} not permitted).
      * 
-     * @see #removeChangeListener(org.jfree.chart.event.OverlayChangeListener) 
+     * @see #removeChangeListener(OverlayChangeListener) 
      */
     void addChangeListener(OverlayChangeListener listener);
 
@@ -78,7 +78,7 @@ public interface Overlay {
      * 
      * @param listener  the listener ({@code null} not permitted).
      * 
-     * @see #addChangeListener(org.jfree.chart.event.OverlayChangeListener) 
+     * @see #addChangeListener(OverlayChangeListener) 
      */
     void removeChangeListener(OverlayChangeListener listener);
 

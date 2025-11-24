@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,21 +27,13 @@
  * -------------------
  * TableXYDataset.java
  * -------------------
- * (C) Copyright 2000-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2000-present, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert;
- *
- * Changes
- * -------
- * 22-Sep-2003 : Changed to be an interface.  Previous functionality moved to
- *               DefaultTableXYDataset;
- * 16-Feb-2004 : Updated Javadocs (DG);
- *
  */
 
 package org.jfree.data.xy;
-
 
 /**
  * A dataset containing one or more data series containing (x, y) data items,
@@ -49,6 +41,8 @@ package org.jfree.data.xy;
  * restricted form of the {@link XYDataset} interface (which allows independent
  * x-values between series). This is used primarily by the
  * {@link org.jfree.chart.renderer.xy.StackedXYAreaRenderer}.
+ *
+ * @param <S> the series key type.
  */
 public interface TableXYDataset<S extends Comparable<S>> extends XYDataset<S> {
 

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ------------------------
  * CombinedRangeXYPlot.java
  * ------------------------
- * (C) Copyright 2001-2021, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-present, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert;
@@ -68,6 +68,8 @@ import org.jfree.data.Range;
 /**
  * An extension of {@link XYPlot} that contains multiple subplots that share a
  * common range axis.
+ *
+ * @param <S> the subplot key type.
  */
 public class CombinedRangeXYPlot<S extends Comparable<S>> extends XYPlot<S>
         implements PlotChangeListener {
@@ -151,7 +153,7 @@ public class CombinedRangeXYPlot<S extends Comparable<S>> extends XYPlot<S>
     }
 
     /**
-     * Sets the flag, on each of the subplots, that controls whether or not the 
+     * Sets the flag, on each of the subplots, that controls whether the 
      * domain is pannable.
      * 
      * @param pannable  the new flag value. 

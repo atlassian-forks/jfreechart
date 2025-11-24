@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------
  * PlumNeedle.java
  * ---------------
- * (C) Copyright 2002-2021, by the Australian Antarctic Division and
+ * (C) Copyright 2002-present, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -45,12 +45,19 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 /**
- * A needle for use with the {@link org.jfree.chart.plot.CompassPlot} class.
+ * A needle for use with the {@link org.jfree.chart.plot.compass.CompassPlot} class.
  */
 public class PlumNeedle extends MeterNeedle implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -3082660488660600718L;
+
+    /**
+     * Creates a new needle.
+     */
+    public PlumNeedle() {
+        super(null, null, null);
+    }
 
     /**
      * Draws the needle.

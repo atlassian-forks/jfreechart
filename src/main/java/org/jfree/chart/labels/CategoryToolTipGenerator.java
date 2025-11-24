@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * -----------------------------
  * CategoryToolTipGenerator.java
  * -----------------------------
- * (C) Copyright 2001-2022, by David Gilbert.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -36,6 +36,7 @@
 
 package org.jfree.chart.labels;
 
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.category.CategoryDataset;
 
 /**
@@ -45,10 +46,12 @@ import org.jfree.data.category.CategoryDataset;
  * items in a {@link org.jfree.chart.plot.CategoryPlot}.
  * <p>
  * To assist with cloning charts, classes that implement this interface should
- * also implement the {@code org.jfree.util.PublicCloneable} interface (in
- * JCommon).
+ * also implement the {@link PublicCloneable} interface.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
-public interface CategoryToolTipGenerator {
+public interface CategoryToolTipGenerator<R extends Comparable<R>, C extends Comparable<C>> {
 
     /**
      * Generates the tool tip text for an item in a dataset.  Note: in the
@@ -61,6 +64,6 @@ public interface CategoryToolTipGenerator {
      *
      * @return The tooltip text (possibly {@code null}).
      */
-    String generateToolTip(CategoryDataset dataset, int row, int column);
+    String generateToolTip(CategoryDataset<R, C> dataset, int row, int column);
 
 }

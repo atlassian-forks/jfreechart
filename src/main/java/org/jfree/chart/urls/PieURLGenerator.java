@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -36,6 +36,7 @@
 
 package org.jfree.chart.urls;
 
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -46,12 +47,13 @@ import org.jfree.data.general.PieDataset;
  *     dataset, as this may be user-specified and could pose a security
  *     risk;</li>
  * <li>should be either (a) immutable, or (b) cloneable via the
- *     {@code PublicCloneable} interface (defined in the JCommon class
- *     library).  This provides a mechanism for the referring plot to clone
+ *     {@link PublicCloneable} interface. This provides a mechanism for the referring plot to clone
  *     the generator if necessary.</li>
  * </ul>
+ *
+ * @param <K> the dataset key type
  */
-public interface PieURLGenerator {
+public interface PieURLGenerator<K extends Comparable<K>>  {
 
     /**
      * Generates a URL for one item in a {@link PieDataset}. As a guideline,
@@ -64,6 +66,6 @@ public interface PieURLGenerator {
      *
      * @return A string containing the URL.
      */
-    String generateURL(PieDataset dataset, Comparable<?> key, int pieIndex);
+    String generateURL(PieDataset<K> dataset, K key, int pieIndex);
 
 }

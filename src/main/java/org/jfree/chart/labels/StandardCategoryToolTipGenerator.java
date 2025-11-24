@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * -------------------------------------
  * StandardCategoryToolTipGenerator.java
  * -------------------------------------
- * (C) Copyright 2004-2022, by David Gilbert.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -45,10 +45,13 @@ import org.jfree.data.category.CategoryDataset;
 /**
  * A standard tool tip generator that can be used with a
  * {@link org.jfree.chart.renderer.category.CategoryItemRenderer}.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
-public class StandardCategoryToolTipGenerator
-        extends AbstractCategoryItemLabelGenerator
-        implements CategoryToolTipGenerator, Serializable {
+public class StandardCategoryToolTipGenerator<R extends Comparable<R>, C extends Comparable<C>>
+        extends AbstractCategoryItemLabelGenerator<R, C>
+        implements CategoryToolTipGenerator<R, C>, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6768806592218710764L;
@@ -100,7 +103,7 @@ public class StandardCategoryToolTipGenerator
      * @return The tooltip text (possibly {@code null}).
      */
     @Override
-    public String generateToolTip(CategoryDataset dataset,
+    public String generateToolTip(CategoryDataset<R, C> dataset,
                                   int row, int column) {
         return generateLabelString(dataset, row, column);
     }
@@ -125,8 +128,11 @@ public class StandardCategoryToolTipGenerator
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        return hash;
+        return super.hashCode();
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

@@ -3,7 +3,7 @@ JFreeChart
 
 Version 2.0.0, not yet released.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
+[![Maven Central](https://img.shields.io/maven-central/v/org.jfree/jfreechart)](https://central.sonatype.com/artifact/org.jfree/jfreechart/versions) [![javadoc](https://javadoc.io/badge2/org.jfree/jfreechart/javadoc.svg)](https://javadoc.io/doc/org.jfree/jfreechart)
 
 Overview
 --------
@@ -15,7 +15,7 @@ export to multiple formats including SVG, PNG and PDF.
 
 The home page for the project is:
 
-http://www.jfree.org/jfreechart
+https://www.jfree.org/jfreechart
 
 JFreeChart requires JDK 11 or later.  For Java 8 support, check the `v1.5.x` branch.
 
@@ -49,7 +49,7 @@ To use JFreeChart in your projects, add the following dependency to your build t
     <dependency>
         <groupId>org.jfree</groupId>
         <artifactId>jfreechart</artifactId>
-        <version>1.5.3</version>
+        <version>1.5.6</version>
     </dependency>
 
 
@@ -78,6 +78,8 @@ History
 -------
 
 ##### Version 2.0 (not yet released)
+- add padding for `Crosshair`label ([#414](https://github.com/jfree/jfreechart/pull/414))
+- add tests for `EncoderUtil` ([#378](https://github.com/jfree/jfreechart/pull/378))
 - use `ThreadLocal` for calendars in time series datasets ([#171](https://github.com/jfree/jfreechart/pull/171));
 - added `valueVisible` flag to `MeterPlot` ([#231](https://github.com/jfree/jfreechart/pull/231));
 - modify buffer in `ChartPanel` to handle high DPI displays ([#170](https://github.com/jfree/jfreechart/issues/170));
@@ -159,7 +161,7 @@ History
 - simplified `ChartFactory` methods;
 - added new methods to `DatasetUtilities` to interpolate y-values in `XYDatasets`;
 - added URLs to labels on `CategoryAxis`;
-- seamless integration with JFreeSVG (http://www.jfree.org/jfreesvg/) and OrsonPDF 
+- seamless integration with JFreeSVG (https://www.jfree.org/jfreesvg/) and OrsonPDF 
 (http://www.object-refinery.com/pdf/);
 - improved the consistency of the `SWTGraphics2D` implementation;  
 
@@ -848,7 +850,7 @@ adjustments (there should be no breakage of applications coded to the 1.0.0 API)
 
 ###### API adjustments
 - `BarRenderer`: added a new flag (`includeBaseInRange`), plus accessor 
-    methods, that controls whether or not the base value for the bar is 
+    methods, that controls whether the base value for the bar is 
     included in the range calculated by the `findRangeBounds()` method;
 - `BubbleXYItemLabelGenerator`: new class;
 - `Range`: added a new method `expandToInclude(Range, double)`, this is used by 

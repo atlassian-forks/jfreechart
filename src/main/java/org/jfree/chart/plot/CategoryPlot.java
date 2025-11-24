@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryPlot.java
  * -----------------
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Jeremy Bowman;
@@ -112,6 +112,9 @@ import org.jfree.data.general.DatasetUtils;
 /**
  * A general plotting class that uses data from a {@link CategoryDataset} and
  * renders each data item using a {@link CategoryItemRenderer}.
+ *
+ * @param <R> the row key type
+ * @param <C> the column key type
  */
 public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> 
         extends Plot implements ValueAxisPlot, Pannable,
@@ -178,7 +181,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     private Map<Integer, AxisLocation> domainAxisLocations;
 
     /**
-     * A flag that controls whether or not the shared domain axis is drawn
+     * A flag that controls whether the shared domain axis is drawn
      * (only relevant when the plot is being used as a subplot).
      */
     private boolean drawSharedDomainAxis;
@@ -197,14 +200,14 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * Typically a dataset is rendered using the scale of a single axis, but
      * a dataset can contribute to the "auto-range" of any number of axes.
      */
-    private TreeMap<Integer, List<Integer>> datasetToDomainAxesMap;
+    private Map<Integer, List<Integer>> datasetToDomainAxesMap;
 
     /** 
      * Storage for keys that map each dataset to one or more range axes. 
      * Typically a dataset is rendered using the scale of a single axis, but
      * a dataset can contribute to the "auto-range" of any number of axes.
      */
-    private TreeMap<Integer, List<Integer>> datasetToRangeAxesMap;
+    private Map<Integer, List<Integer>> datasetToRangeAxesMap;
 
     /** Storage for the renderers. */
     private Map<Integer, CategoryItemRenderer> renderers;
@@ -241,7 +244,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     private transient Paint domainGridlinePaint;
 
     /**
-     * A flag that controls whether or not the zero baseline against the range
+     * A flag that controls whether the zero baseline against the range
      * axis is visible.
      */
     private boolean rangeZeroBaselineVisible;
@@ -269,7 +272,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     private transient Paint rangeGridlinePaint;
 
     /**
-     * A flag that controls whether or not gridlines are shown for the minor
+     * A flag that controls whether gridlines are shown for the minor
      * tick values on the primary range axis.
      */
     private boolean rangeMinorGridlinesVisible;
@@ -318,7 +321,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      */
     private transient Paint domainCrosshairPaint;
 
-    /** A flag that controls whether or not a range crosshair is drawn. */
+    /** A flag that controls whether a range crosshair is drawn. */
     private boolean rangeCrosshairVisible;
 
     /** The range crosshair value. */
@@ -331,7 +334,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     private transient Paint rangeCrosshairPaint;
 
     /**
-     * A flag that controls whether or not the crosshair locks onto actual
+     * A flag that controls whether the crosshair locks onto actual
      * data points.
      */
     private boolean rangeCrosshairLockedOnData = true;
@@ -373,7 +376,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     private LegendItemCollection fixedLegendItems;
 
     /**
-     * A flag that controls whether or not panning is enabled for the
+     * A flag that controls whether panning is enabled for the
      * range axis/axes.
      */
     private boolean rangePannable;
@@ -1159,7 +1162,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * 
      * @since 1.5.4
      */
-    public Map<Integer, CategoryDataset> getDatasets() {
+    public Map<Integer, CategoryDataset<R, C>> getDatasets() {
         return Collections.unmodifiableMap(this.datasets);
     }
 
@@ -1265,7 +1268,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param indices  the list of indices ({@code null} permitted).
      */
     private void checkAxisIndices(List<Integer> indices) {
-        // axisIndices can be:
+        // indices can be:
         // 1.  null;
         // 2.  non-empty, containing only Integer objects that are unique.
         if (indices == null) {
@@ -1276,12 +1279,10 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
             throw new IllegalArgumentException("Empty list not permitted.");
         }
         HashSet<Integer> set = new HashSet<>();
-        for (int i = 0; i < count; i++) {
-            Integer item = indices.get(i);
-            if (set.contains(item)) {
+        for (Integer item : indices) {
+            if (!set.add(item)) {
                 throw new IllegalArgumentException("Indices must be unique.");
-            }
-            set.add(item);
+            };
         }
     }
 
@@ -1639,7 +1640,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag that controls whether or not grid-lines are drawn against
+     * Sets the flag that controls whether grid-lines are drawn against
      * the domain axis.
      * <p>
      * If the flag value changes, a {@link PlotChangeEvent} is sent to all
@@ -1732,7 +1733,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Returns a flag that controls whether or not a zero baseline is
+     * Returns a flag that controls whether a zero baseline is
      * displayed for the range axis.
      *
      * @return A boolean.
@@ -1744,7 +1745,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag that controls whether or not the zero baseline is
+     * Sets the flag that controls whether the zero baseline is
      * displayed for the range axis, and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
@@ -1820,7 +1821,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag that controls whether or not grid-lines are drawn against
+     * Sets the flag that controls whether grid-lines are drawn against
      * the range axis.  If the flag changes value, a {@link PlotChangeEvent} is
      * sent to all registered listeners.
      *
@@ -1898,7 +1899,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag that controls whether or not the range axis minor grid
+     * Sets the flag that controls whether the range axis minor grid
      * lines are visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -2319,8 +2320,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @param marker  the marker.
      *
-     * @return A boolean indicating whether or not the marker was actually
-     *         removed.
+     * @return A boolean indicating whether the marker was actually removed.
      */
     public boolean removeDomainMarker(CategoryMarker marker) {
         return removeDomainMarker(marker, Layer.FOREGROUND);
@@ -2333,8 +2333,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
-     *         removed.
+     * @return A boolean indicating whether the marker was actually removed.
      */
     public boolean removeDomainMarker(CategoryMarker marker, Layer layer) {
         return removeDomainMarker(0, marker, layer);
@@ -2348,8 +2347,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param marker the marker.
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
-     *         removed.
+     * @return A boolean indicating whether the marker was actually removed.
      */
     public boolean removeDomainMarker(int index, CategoryMarker marker, Layer layer) {
         return removeDomainMarker(index, marker, layer, true);
@@ -2364,8 +2362,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param layer the layer (foreground or background).
      * @param notify  notify listeners?
      *
-     * @return A boolean indicating whether or not the marker was actually
-     *         removed.
+     * @return A boolean indicating whether the marker was actually removed.
      */
     public boolean removeDomainMarker(int index, CategoryMarker marker, Layer layer,
             boolean notify) {
@@ -2568,7 +2565,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @param marker the marker.
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(Marker)
@@ -2584,7 +2581,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(Marker, Layer)
@@ -2601,7 +2598,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param marker the marker.
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(int, Marker, Layer)
@@ -2619,7 +2616,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param layer  the layer (foreground or background).
      * @param notify  notify listeners.
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      *
      * @see #addRangeMarker(int, Marker, Layer, boolean)
@@ -2644,7 +2641,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Returns the flag that controls whether or not the domain crosshair is
+     * Returns the flag that controls whether the domain crosshair is
      * displayed by the plot.
      *
      * @return A boolean.
@@ -2656,7 +2653,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag that controls whether or not the domain crosshair is
+     * Sets the flag that controls whether the domain crosshair is
      * displayed by the plot, and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
@@ -2822,7 +2819,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Returns a flag indicating whether or not the range crosshair is visible.
+     * Returns a flag indicating whether the range crosshair is visible.
      *
      * @return The flag.
      *
@@ -2833,7 +2830,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag indicating whether or not the range crosshair is visible.
+     * Sets the flag indicating whether the range crosshair is visible.
      *
      * @param flag  the new value of the flag.
      *
@@ -2847,7 +2844,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Returns a flag indicating whether or not the crosshair should "lock-on"
+     * Returns a flag indicating whether the crosshair should "lock-on"
      * to actual data values.
      *
      * @return The flag.
@@ -2859,7 +2856,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Sets the flag indicating whether or not the range crosshair should
+     * Sets the flag indicating whether the range crosshair should
      * "lock-on" to actual data values, and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
@@ -2903,7 +2900,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * crosshair is visible).
      *
      * @param value  the new value.
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getRangeCrosshairValue()
@@ -3018,7 +3015,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @param annotation  the annotation ({@code null} not permitted).
      *
-     * @return A boolean (indicates whether or not the annotation was removed).
+     * @return A boolean (indicates whether the annotation was removed).
      *
      * @see #addAnnotation(CategoryAnnotation)
      */
@@ -3033,7 +3030,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param annotation  the annotation ({@code null} not permitted).
      * @param notify  notify listeners?
      *
-     * @return A boolean (indicates whether or not the annotation was removed).
+     * @return A boolean (indicates whether the annotation was removed).
      */
     public boolean removeAnnotation(CategoryAnnotation annotation,
             boolean notify) {
@@ -3051,8 +3048,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * registered listeners.
      */
     public void clearAnnotations() {
-        for (int i = 0; i < this.annotations.size(); i++) {
-            CategoryAnnotation annotation = this.annotations.get(i);
+        for (CategoryAnnotation annotation : this.annotations) {
             annotation.removeChangeListener(this);
         }
         this.annotations.clear();
@@ -3621,7 +3617,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param crosshairState  a state object for tracking crosshair info
      *        ({@code null} permitted).
      *
-     * @return A boolean that indicates whether or not real data was found.
+     * @return A boolean that indicates whether real data was found.
      */
     public boolean render(Graphics2D g2, Rectangle2D dataArea, int index,
             PlotRenderingInfo info, CategoryCrosshairState<R, C> crosshairState) {
@@ -4200,7 +4196,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
-     * Returns the flag that controls whether or not the shared domain axis is
+     * Returns the flag that controls whether the shared domain axis is
      * drawn for each subplot.
      *
      * @return A boolean.
@@ -4394,7 +4390,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param factor  the zoom factor.
      * @param info  the plot rendering info.
      * @param source  the source point.
-     * @param useAnchor  a flag that controls whether or not the source point
+     * @param useAnchor  a flag that controls whether the source point
      *         is used for the zoom anchor.
      *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)
@@ -4503,19 +4499,19 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
         if (!Objects.equals(this.axisOffset, that.axisOffset)) {
             return false;
         }
-        if (!this.domainAxes.equals(that.domainAxes)) {
+        if (!Objects.equals(this.domainAxes, that.domainAxes)) {
             return false;
         }
-        if (!this.domainAxisLocations.equals(that.domainAxisLocations)) {
+        if (!Objects.equals(this.domainAxisLocations, that.domainAxisLocations)) {
             return false;
         }
         if (this.drawSharedDomainAxis != that.drawSharedDomainAxis) {
             return false;
         }
-        if (!this.rangeAxes.equals(that.rangeAxes)) {
+        if (!Objects.equals(this.rangeAxes, that.rangeAxes)) {
             return false;
         }
-        if (!this.rangeAxisLocations.equals(that.rangeAxisLocations)) {
+        if (!Objects.equals(this.rangeAxisLocations, that.rangeAxisLocations)) {
             return false;
         }
         if (!Objects.equals(this.datasetToDomainAxesMap, that.datasetToDomainAxesMap)) {
@@ -4527,16 +4523,19 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
         if (!Objects.equals(this.renderers, that.renderers)) {
             return false;
         }
-        if (this.renderingOrder != that.renderingOrder) {
+        if (!Objects.equals(this.renderingOrder, that.renderingOrder)) {
             return false;
         }
         if (this.columnRenderingOrder != that.columnRenderingOrder) {
             return false;
         }
-        if (this.rowRenderingOrder != that.rowRenderingOrder) {
+        if (!Objects.equals(this.rowRenderingOrder, that.rowRenderingOrder)) {
             return false;
         }
         if (this.domainGridlinesVisible != that.domainGridlinesVisible) {
+            return false;
+        }
+        if (this.rangePannable != that.rangePannable) {
             return false;
         }
         if (this.domainGridlinePosition != that.domainGridlinePosition) {
@@ -4545,8 +4544,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
         if (!Objects.equals(this.domainGridlineStroke, that.domainGridlineStroke)) {
             return false;
         }
-        if (!PaintUtils.equal(this.domainGridlinePaint,
-                that.domainGridlinePaint)) {
+        if (!PaintUtils.equal(this.domainGridlinePaint, that.domainGridlinePaint)) {
             return false;
         }
         if (this.rangeGridlinesVisible != that.rangeGridlinesVisible) {
@@ -4555,8 +4553,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
         if (!Objects.equals(this.rangeGridlineStroke, that.rangeGridlineStroke)) {
             return false;
         }
-        if (!PaintUtils.equal(this.rangeGridlinePaint,
-                that.rangeGridlinePaint)) {
+        if (!PaintUtils.equal(this.rangeGridlinePaint, that.rangeGridlinePaint)) {
             return false;
         }
         if (this.anchorValue != that.anchorValue) {
@@ -4571,8 +4568,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
         if (!Objects.equals(this.rangeCrosshairStroke, that.rangeCrosshairStroke)) {
             return false;
         }
-        if (!PaintUtils.equal(this.rangeCrosshairPaint,
-                that.rangeCrosshairPaint)) {
+        if (!PaintUtils.equal(this.rangeCrosshairPaint, that.rangeCrosshairPaint)) {
             return false;
         }
         if (this.rangeCrosshairLockedOnData
@@ -4628,8 +4624,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
         if (!Objects.equals(this.domainCrosshairStroke, that.domainCrosshairStroke)) {
             return false;
         }
-        if (this.rangeMinorGridlinesVisible
-                != that.rangeMinorGridlinesVisible) {
+        if (this.rangeMinorGridlinesVisible != that.rangeMinorGridlinesVisible) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeMinorGridlinePaint,
@@ -4656,99 +4651,58 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     @Override
-    public int hashCode()
-    {
-        int hash = 7;
-        hash = 37 * hash +
-                (this.orientation != null ? this.orientation.hashCode() : 0);
-        hash = 37 * hash +
-                (this.axisOffset != null ? this.axisOffset.hashCode() : 0);
-        hash = 37 * hash +
-                (this.domainAxes != null ? this.domainAxes.hashCode() : 0);
-        hash = 37 * hash +
-                (this.domainAxisLocations != null ? this.domainAxisLocations.hashCode() : 0);
-        hash = 37 * hash + (this.drawSharedDomainAxis ? 1 : 0);
-        hash = 37 * hash +
-                (this.rangeAxes != null ? this.rangeAxes.hashCode() : 0);
-        hash = 37 * hash +
-                (this.rangeAxisLocations != null ? this.rangeAxisLocations.hashCode() : 0);
-        hash = 37 * hash + (this.datasets != null ? this.datasets.hashCode() : 0);
-        hash = 37 * hash +
-                (this.datasetToDomainAxesMap != null ? this.datasetToDomainAxesMap.hashCode() : 0);
-        hash = 37 * hash +
-                (this.datasetToRangeAxesMap != null ? this.datasetToRangeAxesMap.hashCode() : 0);
-        hash = 37 * hash +
-                (this.renderers != null ? this.renderers.hashCode() : 0);
-        hash = 37 * hash +
-                (this.renderingOrder != null ? this.renderingOrder.hashCode() : 0);
-        hash = 37 * hash +
-                (this.columnRenderingOrder != null ? this.columnRenderingOrder.hashCode() : 0);
-        hash = 37 * hash +
-                (this.rowRenderingOrder != null ? this.rowRenderingOrder.hashCode() : 0);
-        hash = 37 * hash + (this.domainGridlinesVisible ? 1 : 0);
-        hash = 37 * hash +
-                (this.domainGridlinePosition != null ? this.domainGridlinePosition.hashCode() : 0);
-        hash = 37 * hash +
-                (this.domainGridlineStroke != null ? this.domainGridlineStroke.hashCode() : 0);
-        hash = 37 * hash +
-                (this.domainGridlinePaint != null ? this.domainGridlinePaint.hashCode() : 0);
-        hash = 37 * hash + (this.rangeZeroBaselineVisible ? 1 : 0);
-        hash = 37 * hash +
-                (this.rangeZeroBaselineStroke != null ? this.rangeZeroBaselineStroke.hashCode() : 0);
-        hash = 37 * hash +
-                (this.rangeZeroBaselinePaint != null ? this.rangeZeroBaselinePaint.hashCode() : 0);
-        hash = 37 * hash + (this.rangeGridlinesVisible ? 1 : 0);
-        hash = 37 * hash +
-                (this.rangeGridlineStroke != null ? this.rangeGridlineStroke.hashCode() : 0);
-        hash = 37 * hash +
-                (this.rangeGridlinePaint != null ? this.rangeGridlinePaint.hashCode() : 0);
-        hash = 37 * hash + (this.rangeMinorGridlinesVisible ? 1 : 0);
-        hash = 37 * hash +
-                (this.rangeMinorGridlineStroke != null ? this.rangeMinorGridlineStroke.hashCode() : 0);
-        hash = 37 * hash +
-                (this.rangeMinorGridlinePaint != null ? this.rangeMinorGridlinePaint.hashCode() : 0);
-        hash = 37 * hash +
-                (int) (Double.doubleToLongBits(this.anchorValue) ^
-                (Double.doubleToLongBits(this.anchorValue) >>> 32));
-        hash = 37 * hash + this.crosshairDatasetIndex;
-        hash = 37 * hash + (this.domainCrosshairVisible ? 1 : 0);
-        hash = 37 * hash +
-                (this.domainCrosshairRowKey != null ? this.domainCrosshairRowKey.hashCode() : 0);
-        hash = 37 * hash +
-                (this.domainCrosshairColumnKey != null ? this.domainCrosshairColumnKey.hashCode() : 0);
-        hash = 37 * hash +
-                (this.domainCrosshairStroke != null ? this.domainCrosshairStroke.hashCode() : 0);
-        hash = 37 * hash +
-                (this.domainCrosshairPaint != null ? this.domainCrosshairPaint.hashCode() : 0);
-        hash = 37 * hash + (this.rangeCrosshairVisible ? 1 : 0);
-        hash = 37 * hash +
-                (int) (Double.doubleToLongBits(this.rangeCrosshairValue) ^
-                (Double.doubleToLongBits(this.rangeCrosshairValue) >>> 32));
-        hash = 37 * hash +
-                (this.rangeCrosshairStroke != null ? this.rangeCrosshairStroke.hashCode() : 0);
-        hash = 37 * hash +
-                (this.rangeCrosshairPaint != null ? this.rangeCrosshairPaint.hashCode() : 0);
-        hash = 37 * hash + (this.rangeCrosshairLockedOnData ? 1 : 0);
-        hash = 37 * hash +
-                (this.foregroundDomainMarkers != null ? this.foregroundDomainMarkers.hashCode() : 0);
-        hash = 37 * hash +
-                (this.backgroundDomainMarkers != null ? this.backgroundDomainMarkers.hashCode() : 0);
-        hash = 37 * hash +
-                (this.foregroundRangeMarkers != null ? this.foregroundRangeMarkers.hashCode() : 0);
-        hash = 37 * hash +
-                (this.backgroundRangeMarkers != null ? this.backgroundRangeMarkers.hashCode() : 0);
-        hash = 37 * hash +
-                (this.annotations != null ? this.annotations.hashCode() : 0);
-        hash = 37 * hash + this.weight;
-        hash = 37 * hash +
-                (this.fixedDomainAxisSpace != null ? this.fixedDomainAxisSpace.hashCode() : 0);
-        hash = 37 * hash +
-                (this.fixedRangeAxisSpace != null ? this.fixedRangeAxisSpace.hashCode() : 0);
-        hash = 37 * hash +
-                (this.fixedLegendItems != null ? this.fixedLegendItems.hashCode() : 0);
-        hash = 37 * hash + (this.rangePannable ? 1 : 0);
-        hash = 37 * hash +
-                (this.shadowGenerator != null ? this.shadowGenerator.hashCode() : 0);
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = 71 * hash + Objects.hashCode(this.orientation);
+        hash = 71 * hash + Objects.hashCode(this.axisOffset);
+        hash = 71 * hash + Objects.hashCode(this.domainAxes);
+        hash = 71 * hash + Objects.hashCode(this.domainAxisLocations);
+        hash = 71 * hash + (this.drawSharedDomainAxis ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.rangeAxes);
+        hash = 71 * hash + Objects.hashCode(this.rangeAxisLocations);
+        hash = 71 * hash + Objects.hashCode(this.datasets);
+        hash = 71 * hash + Objects.hashCode(this.datasetToDomainAxesMap);
+        hash = 71 * hash + Objects.hashCode(this.datasetToRangeAxesMap);
+        hash = 71 * hash + Objects.hashCode(this.renderers);
+        hash = 71 * hash + Objects.hashCode(this.renderingOrder);
+        hash = 71 * hash + Objects.hashCode(this.columnRenderingOrder);
+        hash = 71 * hash + Objects.hashCode(this.rowRenderingOrder);
+        hash = 71 * hash + (this.domainGridlinesVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.domainGridlinePosition);
+        hash = 71 * hash + Objects.hashCode(this.domainGridlineStroke);
+        hash = 71 * hash + Objects.hashCode(this.domainGridlinePaint);
+        hash = 71 * hash + (this.rangeZeroBaselineVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.rangeZeroBaselineStroke);
+        hash = 71 * hash + Objects.hashCode(this.rangeZeroBaselinePaint);
+        hash = 71 * hash + (this.rangeGridlinesVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.rangeGridlineStroke);
+        hash = 71 * hash + Objects.hashCode(this.rangeGridlinePaint);
+        hash = 71 * hash + (this.rangeMinorGridlinesVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.rangeMinorGridlineStroke);
+        hash = 71 * hash + Objects.hashCode(this.rangeMinorGridlinePaint);
+        hash = 71 * hash + Long.hashCode(Double.doubleToLongBits(this.anchorValue));
+        hash = 71 * hash + this.crosshairDatasetIndex;
+        hash = 71 * hash + (this.domainCrosshairVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.domainCrosshairRowKey);
+        hash = 71 * hash + Objects.hashCode(this.domainCrosshairColumnKey);
+        hash = 71 * hash + Objects.hashCode(this.domainCrosshairStroke);
+        hash = 71 * hash + Objects.hashCode(this.domainCrosshairPaint);
+        hash = 71 * hash + (this.rangeCrosshairVisible ? 1 : 0);
+        hash = 71 * hash + Long.hashCode(Double.doubleToLongBits(this.rangeCrosshairValue));
+        hash = 71 * hash + Objects.hashCode(this.rangeCrosshairStroke);
+        hash = 71 * hash + Objects.hashCode(this.rangeCrosshairPaint);
+        hash = 71 * hash + (this.rangeCrosshairLockedOnData ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.foregroundDomainMarkers);
+        hash = 71 * hash + Objects.hashCode(this.backgroundDomainMarkers);
+        hash = 71 * hash + Objects.hashCode(this.foregroundRangeMarkers);
+        hash = 71 * hash + Objects.hashCode(this.backgroundRangeMarkers);
+        hash = 71 * hash + Objects.hashCode(this.annotations);
+        hash = 71 * hash + this.weight;
+        hash = 71 * hash + Objects.hashCode(this.fixedDomainAxisSpace);
+        hash = 71 * hash + Objects.hashCode(this.fixedRangeAxisSpace);
+        hash = 71 * hash + Objects.hashCode(this.fixedLegendItems);
+        hash = 71 * hash + (this.rangePannable ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.shadowGenerator);
         return hash;
     }
 

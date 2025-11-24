@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------
  * PaintAlpha.java
  * ---------------
- * (C) Copyright 2011-2020 by DaveLaw and Contributors.
+ * (C) Copyright 2011-present by DaveLaw and Contributors.
  *
  * Original Author:  DaveLaw (dave ATT davelaw D0TT de);
  * Contributor(s):   David Gilbert;
@@ -63,7 +63,7 @@ import java.util.Hashtable;
  * in particular a {@link PaintAlpha#cloneImage(BufferedImage) cloneImage(..)}
  * method which is needed to darken objects of type {@link TexturePaint}.
  *
- * @author  DaveLaw
+ * @author DaveLaw
  * 
  * @since 1.0.15
  */
@@ -80,6 +80,10 @@ public class PaintAlpha {
     private static final double FACTOR = 0.7;
 
     private static boolean legacyAlpha = false;
+
+    private PaintAlpha() {
+        // no requirement to instantiate
+    }
 
     /**
      * Per default {@code PaintAlpha} will try to honour alpha-channel
@@ -100,10 +104,10 @@ public class PaintAlpha {
     /**
      * Create a new (if possible, darker) {@code Paint} of the same Type.
      * If the Type is not supported, the original {@code Paint} is returned.
-     * <p>
+     *
      * @param paint a {@code Paint} implementation
      * (e.g. {@link Color}, {@link GradientPaint}, {@link TexturePaint},..)
-     * <p>
+     *
      * @return a (usually new, see above) {@code Paint}
      */
     public static Paint darker(Paint paint) {
@@ -111,7 +115,7 @@ public class PaintAlpha {
         if (paint instanceof Color) {
             return darker((Color) paint);
         }
-        if (legacyAlpha == true) {
+        if (legacyAlpha) {
             /*
              * Legacy? Just return the original Paint.
              * (this corresponds EXACTLY to how Paints used to be darkened)
@@ -222,7 +226,7 @@ public class PaintAlpha {
      * @return a darker version of the {@code TexturePaint}
      */
     private static TexturePaint darkerTexturePaint(TexturePaint paint) {
-        /**
+        /*
          * Color Models with pre-multiplied Alpha tested OK without any
          * special logic
          *
@@ -243,11 +247,11 @@ public class PaintAlpha {
 
         final int   wid = ras.getWidth();
 
-        /**/  int[] pix = new int[wid * img.getSampleModel().getNumBands()];
-        /* (pix-buffer is large enough for all pixels of one row) */
+        int[] pix = new int[wid * img.getSampleModel().getNumBands()];
+        // (pix-buffer is large enough for all pixels of one row)
 
-        /**
-         * Indexed Color Models (sort of a Palette) CANNOT be simply
+        /*
+         * Indexed Color Models (sort of Palette) CANNOT be simply
          * multiplied (the pixel-value is just an index into the Palette).
          *
          * Fortunately, IndexColorModel.getComponents(..) resolves the colors.
@@ -288,13 +292,13 @@ public class PaintAlpha {
             return new TexturePaint(img, paint.getAnchorRect());
         }
 
-        /**
+        /*
          * For the other 2 Color Models, java.awt.image.ComponentColorModel and
          * java.awt.image.DirectColorModel, the order of subpixels returned by
          * ras.getPixels(..) was observed to correspond to the following...
          */
         if (img.getSampleModel().getNumBands() == 4) {
-            /**
+            /*
              * The following Image Types have an Alpha-channel which we will
              * leave unchanged:
              *
@@ -327,7 +331,7 @@ public class PaintAlpha {
             }
             img.setData(ras);
             return new TexturePaint(img, paint.getAnchorRect());
-            /**
+            /*
              * Above, we multiplied every pixel by our FACTOR because the
              * applicable Image Types consist only of color or grey channels:
              *

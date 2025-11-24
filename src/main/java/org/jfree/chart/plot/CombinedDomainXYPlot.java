@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * -------------------------
  * CombinedDomainXYPlot.java
  * -------------------------
- * (C) Copyright 2001-2021, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-present, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert;
@@ -70,6 +70,8 @@ import org.jfree.data.xy.XYDataset;
 /**
  * An extension of {@link XYPlot} that contains multiple subplots that share a
  * common domain axis.
+ *
+ * @param <S> the subplot key type.
  */
 public class CombinedDomainXYPlot<S extends Comparable<S>> extends XYPlot<S>
         implements PlotChangeListener {
@@ -160,7 +162,7 @@ public class CombinedDomainXYPlot<S extends Comparable<S>> extends XYPlot<S>
     }
     
     /**
-     * Sets the flag, on each of the subplots, that controls whether or not the 
+     * Sets the flag, on each of the subplots, that controls whether the 
      * range is pannable.
      * 
      * @param pannable  the new flag value. 
@@ -514,7 +516,7 @@ public class CombinedDomainXYPlot<S extends Comparable<S>> extends XYPlot<S>
     public void zoomRangeAxes(double factor, PlotRenderingInfo state,
             Point2D source, boolean useAnchor) {
         // delegate 'state' and 'source' argument checks...
-        XYPlot subplot = findSubplot(state, source);
+        XYPlot<S> subplot = findSubplot(state, source);
         if (subplot != null) {
             subplot.zoomRangeAxes(factor, state, source, useAnchor);
         } else {
@@ -589,15 +591,14 @@ public class CombinedDomainXYPlot<S extends Comparable<S>> extends XYPlot<S>
      *
      * @return A subplot (possibly {@code null}).
      */
-    public XYPlot findSubplot(PlotRenderingInfo info, Point2D source) {
+    public XYPlot<S> findSubplot(PlotRenderingInfo info, Point2D source) {
         Args.nullNotPermitted(info, "info");
         Args.nullNotPermitted(source, "source");
-        XYPlot result = null;
         int subplotIndex = info.getSubplotIndex(source);
         if (subplotIndex >= 0) {
-            result =  (XYPlot) this.subplots.get(subplotIndex);
+            return this.subplots.get(subplotIndex);
         }
-        return result;
+        return null;
     }
 
     /**

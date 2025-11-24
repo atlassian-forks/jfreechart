@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ----------
  * Month.java
  * ----------
- * (C) Copyright 2001-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2001-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Chris Boek;
@@ -54,10 +54,10 @@ public class Month extends RegularTimePeriod implements Serializable {
     private static final long serialVersionUID = -5090216912548722570L;
 
     /** The month (1-12). */
-    private int month;
+    private final int month;
 
     /** The year in which the month falls. */
-    private int year;
+    private final int year;
 
     /** The first millisecond. */
     private long firstMillisecond;
@@ -83,6 +83,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * @param year  the year.
      */
     public Month(int month, int year) {
+        super();
         if ((month < 1) || (month > 12)) {
             throw new IllegalArgumentException("Month outside valid range.");
         }
@@ -100,6 +101,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * @param year  the year.
      */
     public Month(int month, Year year) {
+        super();
         if ((month < 1) || (month > 12)) {
             throw new IllegalArgumentException("Month outside valid range.");
         }
@@ -132,6 +134,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * @since 1.0.12
      */
     public Month(Date time, TimeZone zone, Locale locale) {
+        super();
         Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
         this.month = calendar.get(Calendar.MONTH) + 1;
@@ -148,6 +151,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * @param calendar the calendar to use for calculations ({@code null} not permitted).
      */
     public Month(Date time, Calendar calendar) {
+        super();
         calendar.setTime(time);
         this.month = calendar.get(Calendar.MONTH) + 1;
         this.year = calendar.get(Calendar.YEAR);
@@ -354,7 +358,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     @Override
-    public int compareTo(Object o1) {
+    public int compareTo(TimePeriod o1) {
 
         int result;
 
@@ -452,7 +456,7 @@ public class Month extends RegularTimePeriod implements Serializable {
         }
         else {
             s1 = s.substring(0, i).trim();
-            s2 = s.substring(i + 1, s.length()).trim();
+            s2 = s.substring(i + 1).trim();
             // now it is trickier to determine if the month or year is first
             Year y1 = Month.evaluateAsYear(s1);
             if (y1 == null) {

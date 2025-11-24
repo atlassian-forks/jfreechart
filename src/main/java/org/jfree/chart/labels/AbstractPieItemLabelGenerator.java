@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ----------------------------------
  * AbstractPieItemLabelGenerator.java
  * ----------------------------------
- * (C) Copyright 2004-2022, by David Gilbert.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -47,8 +47,10 @@ import org.jfree.data.general.PieDataset;
 
 /**
  * A base class used for generating pie chart item labels.
+ *
+ * @param <K> the dataset key type.
  */
-public class AbstractPieItemLabelGenerator implements Serializable {
+public class AbstractPieItemLabelGenerator<K extends Comparable<K>> implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7347703325267846275L;
@@ -125,7 +127,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      *
      * @return The items (never {@code null}).
      */
-    protected Object[] createItemArray(PieDataset dataset, Comparable key) {
+    protected Object[] createItemArray(PieDataset<K> dataset, K key) {
         Object[] result = new Object[4];
         double total = DatasetUtils.calculatePieDatasetTotal(dataset);
         result[0] = key.toString();
@@ -156,7 +158,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      *
      * @return The label (possibly {@code null}).
      */
-    protected String generateSectionLabel(PieDataset dataset, Comparable key) {
+    protected String generateSectionLabel(PieDataset<K> dataset, K key) {
         String result = null;
         if (dataset != null) {
             Object[] items = createItemArray(dataset, key);
@@ -181,8 +183,8 @@ public class AbstractPieItemLabelGenerator implements Serializable {
             return false;
         }
 
-        AbstractPieItemLabelGenerator that
-                = (AbstractPieItemLabelGenerator) obj;
+        AbstractPieItemLabelGenerator<?> that
+                = (AbstractPieItemLabelGenerator<?>) obj;
         if (!this.labelFormat.equals(that.labelFormat)) {
             return false;
         }
@@ -219,8 +221,8 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        AbstractPieItemLabelGenerator clone
-                = (AbstractPieItemLabelGenerator) super.clone();
+        AbstractPieItemLabelGenerator<?> clone
+                = (AbstractPieItemLabelGenerator<?>) super.clone();
         if (this.numberFormat != null) {
             clone.numberFormat = (NumberFormat) this.numberFormat.clone();
         }

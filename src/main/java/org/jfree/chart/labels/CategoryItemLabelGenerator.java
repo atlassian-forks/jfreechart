@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * -------------------------------
  * CategoryItemLabelGenerator.java
  * -------------------------------
- * (C) Copyright 2001-2022, by David Gilbert.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -46,8 +46,11 @@ import org.jfree.data.category.CategoryDataset;
  * <p>
  * To assist with cloning charts, classes that implement this interface should
  * also implement the {@link org.jfree.chart.api.PublicCloneable} interface.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
-public interface CategoryItemLabelGenerator {
+public interface CategoryItemLabelGenerator<R extends Comparable<R>, C extends Comparable<C>> {
 
     /**
      * Generates a label for the specified row.
@@ -57,7 +60,7 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label.
      */
-    String generateRowLabel(CategoryDataset dataset, int row);
+    String generateRowLabel(CategoryDataset<R, C> dataset, int row);
 
     /**
      * Generates a label for the specified row.
@@ -67,7 +70,7 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label.
      */
-    String generateColumnLabel(CategoryDataset dataset, int column);
+    String generateColumnLabel(CategoryDataset<R, C> dataset, int column);
 
     /**
      * Generates a label for the specified item. The label is typically a
@@ -79,6 +82,6 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label (possibly {@code null}).
      */
-    String generateLabel(CategoryDataset dataset, int row, int column);
+    String generateLabel(CategoryDataset<R, C> dataset, int row, int column);
 
 }

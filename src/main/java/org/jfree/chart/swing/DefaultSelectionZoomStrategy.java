@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,12 +27,10 @@
  * ---------------------------------
  * DefaultSelectionZoomStrategy.java
  * ---------------------------------
- * (C) Copyright 2021-2022 by David Gilbert and Contributors.
+ * (C) Copyright 2021-present by David Gilbert and Contributors.
  *
  * Original Author:  -;
  * Contributor(s):   David Gilbert;
- *              
- *
  */
 
 package org.jfree.chart.swing;
@@ -49,8 +47,6 @@ import java.io.ObjectOutputStream;
 import org.jfree.chart.internal.SerialUtils;
 
 /**
- * {@inheritDoc}
- *
  * This implementation can be extended to override default behavior.
  */
 public class DefaultSelectionZoomStrategy implements SelectionZoomStrategy {
@@ -92,6 +88,9 @@ public class DefaultSelectionZoomStrategy implements SelectionZoomStrategy {
      */
     private transient Paint zoomFillPaint;
 
+    /**
+     * Creates a new instance.
+     */
     public DefaultSelectionZoomStrategy() {
         zoomTriggerDistance = DEFAULT_ZOOM_TRIGGER_DISTANCE;
         this.zoomOutlinePaint = Color.BLUE;

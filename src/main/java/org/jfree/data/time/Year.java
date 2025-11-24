@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------
  * Year.java
  * ---------
- * (C) Copyright 2001-2022, by David Gilbert.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -66,7 +66,7 @@ public class Year extends RegularTimePeriod implements Serializable {
     private static final long serialVersionUID = -7659990929736074836L;
 
     /** The year. */
-    private short year;
+    private final short year;
 
     /** The first millisecond. */
     private long firstMillisecond;
@@ -91,6 +91,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @param year  the year.
      */
     public Year(int year) {
+        super();
         if ((year < Year.MINIMUM_YEAR) || (year > Year.MAXIMUM_YEAR)) {
             throw new IllegalArgumentException(
                 "Year constructor: year (" + year + ") outside valid range.");
@@ -123,6 +124,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @since 1.0.12
      */
     public Year(Date time, TimeZone zone, Locale locale) {
+        super();
         Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
         this.year = (short) calendar.get(Calendar.YEAR);
@@ -138,6 +140,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @param calendar the calendar to use for calculations ({@code null} not permitted).
      */
     public Year(Date time, Calendar calendar) {
+        super();
         calendar.setTime(time);
         this.year = (short) calendar.get(Calendar.YEAR);
         peg(calendar);
@@ -317,8 +320,7 @@ public class Year extends RegularTimePeriod implements Serializable {
     @Override
     public int hashCode() {
         int result = 17;
-        int c = this.year;
-        result = 37 * result + c;
+        result = 37 * result + this.year;
         return result;
     }
 
@@ -333,7 +335,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     @Override
-    public int compareTo(Object o1) {
+    public int compareTo(TimePeriod o1) {
 
         int result;
 

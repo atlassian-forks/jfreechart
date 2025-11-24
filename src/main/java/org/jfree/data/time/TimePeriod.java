@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------
  * TimePeriod.java
  * ---------------
- * (C) Copyright 2003-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2003-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -42,7 +42,7 @@ import java.util.Date;
  * A period of time measured to millisecond precision using two instances of
  * {@code java.util.Date}.
  */
-public interface TimePeriod extends Comparable {
+public interface TimePeriod extends Comparable<TimePeriod> {
 
     /**
      * Returns the start date/time.  This will always be on or before the

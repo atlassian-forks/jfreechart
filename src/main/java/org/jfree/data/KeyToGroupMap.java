@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ------------------
  * KeyToGroupMap.java
  * ------------------
- * (C) Copyright 2004-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -46,6 +46,9 @@ import java.util.*;
 
 /**
  * A class that maps keys (instances of {@code Comparable}) to groups.
+ *
+ * @param <K> the key type
+ * @param <G> the group key type
  */
 public class KeyToGroupMap<K extends Comparable<K>, G extends Comparable<G>> 
         implements Cloneable, PublicCloneable, Serializable {

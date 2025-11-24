@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------------------
  * ComparableObjectSeries.java
  * ---------------------------
- * (C) Copyright 2006-2022, by David Gilbert.
+ * (C) Copyright 2006-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -50,6 +50,8 @@ import java.util.Objects;
 
 /**
  * A (possibly ordered) list of (Comparable, Object) data items.
+ *
+ * @param <K> the key type.
  */
 public class ComparableObjectSeries<K extends Comparable<K>> extends Series<K>
         implements Cloneable, Serializable {
@@ -61,10 +63,10 @@ public class ComparableObjectSeries<K extends Comparable<K>> extends Series<K>
     private int maximumItemCount = Integer.MAX_VALUE;
 
     /** A flag that controls whether the items are automatically sorted. */
-    private boolean autoSort;
+    private final boolean autoSort;
 
-    /** A flag that controls whether or not duplicate x-values are allowed. */
-    private boolean allowDuplicateXValues;
+    /** A flag that controls whether duplicate x-values are allowed. */
+    private final boolean allowDuplicateXValues;
 
     /**
      * Creates a new empty series.  By default, items added to the series will
@@ -79,10 +81,10 @@ public class ComparableObjectSeries<K extends Comparable<K>> extends Series<K>
 
     /**
      * Constructs a new series that contains no data.  You can specify
-     * whether or not duplicate x-values are allowed for the series.
+     * whether duplicate x-values are allowed for the series.
      *
      * @param key  the series key ({@code null} not permitted).
-     * @param autoSort  a flag that controls whether or not the items in the
+     * @param autoSort  a flag that controls whether the items in the
      *                  series are sorted.
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
@@ -187,7 +189,7 @@ public class ComparableObjectSeries<K extends Comparable<K>> extends Series<K>
      *
      * @param x  the x-value ({@code null} not permitted).
      * @param y  the y-value ({@code null} permitted).
-     * @param notify  a flag the controls whether or not a
+     * @param notify  a flag the controls whether a
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
      */
@@ -202,7 +204,7 @@ public class ComparableObjectSeries<K extends Comparable<K>> extends Series<K>
      * {@link SeriesChangeEvent} to all registered listeners.
      *
      * @param item  the (x, y) item ({@code null} not permitted).
-     * @param notify  a flag that controls whether or not a
+     * @param notify  a flag that controls whether a
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
      */
@@ -344,7 +346,7 @@ public class ComparableObjectSeries<K extends Comparable<K>> extends Series<K>
      * listeners.
      */
     public void clear() {
-        if (this.data.size() > 0) {
+        if (!this.data.isEmpty()) {
             this.data.clear();
             fireSeriesChanged();
         }

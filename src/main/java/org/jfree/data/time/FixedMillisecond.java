@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------------
  * FixedMillisecond.java
  * ---------------------
- * (C) Copyright 2002-2022, by David Gilbert.
+ * (C) Copyright 2002-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Ulrich Voigt;
@@ -67,6 +67,7 @@ public class FixedMillisecond extends RegularTimePeriod
      * @param millisecond  the millisecond (same encoding as java.util.Date).
      */
     public FixedMillisecond(long millisecond) {
+        super();
         this.time = millisecond;
     }
 
@@ -170,7 +171,7 @@ public class FixedMillisecond extends RegularTimePeriod
      * @return negative == before, zero == same, positive == after.
      */
     @Override
-    public int compareTo(Object o1) {
+    public int compareTo(TimePeriod o1) {
 
         int result;
         long difference;

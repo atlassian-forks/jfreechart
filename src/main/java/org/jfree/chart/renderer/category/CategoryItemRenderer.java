@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -28,7 +28,7 @@
  * CategoryItemRenderer.java
  * -------------------------
  *
- * (C) Copyright 2001-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2001-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Mark Watson (www.markwatson.com);
@@ -1328,7 +1328,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
     // CREATE ENTITIES
 
     /**
-     * Returns a flag that determines whether or not an entity is generated
+     * Returns a flag that determines whether an entity is generated
      * for the specified item.  The standard implementation of this method
      * will typically return the flag for the series or, if that is 
      * {@code null}, the value returned by {@link #getDefaultCreateEntities()}.
@@ -1341,7 +1341,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
     boolean getItemCreateEntity(int series, int item);
 
     /**
-     * Returns a boolean indicating whether or not entities should be created 
+     * Returns a boolean indicating whether entities should be created 
      * for the items in a series.
      * 
      * @param series  the series index (zero-based).
@@ -1351,7 +1351,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
     Boolean getSeriesCreateEntities(int series);
 
     /**
-     * Sets a flag that indicates whether or not entities should be created during
+     * Sets a flag that indicates whether entities should be created during
      * rendering for the items in the specified series, and sends a 
      * {@link RendererChangeEvent} to all registered listeners.
      * 
@@ -1361,7 +1361,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
     void setSeriesCreateEntities(int series, Boolean create);
 
     /**
-     * Sets a flag that indicates whether or not entities should be created during
+     * Sets a flag that indicates whether entities should be created during
      * rendering for the items in the specified series, and sends a 
      * {@link RendererChangeEvent} to all registered listeners if requested.
      * 
@@ -1372,7 +1372,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
     void setSeriesCreateEntities(int series, Boolean create, boolean notify);
 
     /**
-     * Returns the default value for the flag that controls whether or not
+     * Returns the default value for the flag that controls whether
      * an entity is created for an item during rendering.  
      * 
      * @return A boolean. 
@@ -1380,7 +1380,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
     boolean getDefaultCreateEntities();
 
     /**
-     * Sets the default setting for whether or not entities should be created
+     * Sets the default setting for whether entities should be created
      * for items during rendering, and sends a {@link RendererChangeEvent} to 
      * all registered listeners.
      * 
@@ -1389,7 +1389,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
     void setDefaultCreateEntities(boolean create);
 
     /**
-     * Sets the default setting for whether or not entities should be created
+     * Sets the default setting for whether entities should be created
      * for items during rendering, and sends a {@link RendererChangeEvent} to 
      * all registered listeners if requested.
      * 

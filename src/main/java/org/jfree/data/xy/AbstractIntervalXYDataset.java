@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,23 +27,30 @@
  * ------------------------------
  * AbstractIntervalXYDataset.java
  * ------------------------------
- * (C) Copyright 2004-2022, by David Gilbert.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
  * Original Author:  David Gilbert.
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xy;
 
-
 /**
  * An base class that you can use to create new implementations of the
  * {@link IntervalXYDataset} interface.
+ *
+ * @param <S> the series key type.
  */
-public abstract class AbstractIntervalXYDataset<S extends Comparable<S>> 
+public abstract class AbstractIntervalXYDataset<S extends Comparable<S>>
         extends AbstractXYDataset<S>
         implements IntervalXYDataset<S> {
+
+    /**
+     * Creates a new empty dataset.
+     */
+    public AbstractIntervalXYDataset() {
+        super();
+    }
 
     /**
      * Returns the start x-value (as a double primitive) for an item within a

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,11 +27,10 @@
  * ----------------
  * ExportUtils.java
  * ----------------
- * (C) Copyright 2014-2022 by David Gilbert and Contributors.
+ * (C) Copyright 2014-present by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.chart.util;
@@ -58,11 +57,15 @@ import org.jfree.chart.internal.Args;
  */
 public class ExportUtils {
 
+    private ExportUtils() {
+        // no need to instantiate
+    }
+
     /**
      * Returns {@code true} if JFreeSVG is on the classpath, and 
      * {@code false} otherwise.  The JFreeSVG library can be found at
-     * http://www.jfree.org/jfreesvg/
-     * 
+     * https://www.jfree.org/jfreesvg/
+     *
      * @return A boolean.
      */
     public static boolean isJFreeSVGAvailable() {
@@ -147,7 +150,7 @@ public class ExportUtils {
      * @param h  the chart height.
      * @param file  the output file ({@code null} not permitted).
      */
-    public static final void writeAsPDF(Drawable drawable, 
+    public static void writeAsPDF(Drawable drawable,
             int w, int h, File file) {
         if (!ExportUtils.isOrsonPDFAvailable()) {
             throw new IllegalStateException(

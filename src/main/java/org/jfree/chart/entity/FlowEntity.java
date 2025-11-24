@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------
  * FlowEntity.java
  * ---------------
- * (C) Copyright 2021-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2021-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -45,11 +45,12 @@ import org.jfree.data.flow.FlowKey;
 /**
  * A chart entity representing the flow between two nodes in a {@link FlowPlot}.
  * 
- * @since 1.5.3
+ * @param <K> the data key type.
  */
-public class FlowEntity extends ChartEntity {
+public class FlowEntity<K extends Comparable<K>> extends ChartEntity {
 
-    private FlowKey key;
+    /** The key. */
+    private final FlowKey<K> key;
     
     /**
      * Creates a new instance.
@@ -59,7 +60,7 @@ public class FlowEntity extends ChartEntity {
      * @param toolTipText  the tool tip text.
      * @param urlText  the URL text.
      */
-    public FlowEntity(FlowKey key, Shape area, String toolTipText, String urlText) {
+    public FlowEntity(FlowKey<K> key, Shape area, String toolTipText, String urlText) {
         super(area, toolTipText, urlText);
         Args.nullNotPermitted(key, "key");
         this.key = key;
@@ -70,7 +71,7 @@ public class FlowEntity extends ChartEntity {
      * 
      * @return The flow key (never {@code null}). 
      */
-    public FlowKey getKey() {
+    public FlowKey<K> getKey() {
         return this.key;
     }
 

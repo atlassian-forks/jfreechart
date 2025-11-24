@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,11 +27,10 @@
  * -------------------------------
  * StatisticalCategoryDataset.java
  * -------------------------------
- * (C) Copyright 2002-2020, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-present, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert;
- *
  */
 
 package org.jfree.data.statistics;
@@ -41,6 +40,9 @@ import org.jfree.data.category.CategoryDataset;
 /**
  * A category dataset that defines a mean and standard deviation value for
  * each item.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
 public interface StatisticalCategoryDataset<R extends Comparable<R>, 
         C extends Comparable<C>> extends CategoryDataset<R, C> {

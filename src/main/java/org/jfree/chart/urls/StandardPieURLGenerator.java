@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -46,8 +46,10 @@ import org.jfree.data.general.PieDataset;
 
 /**
  * A URL generator for pie charts.  Instances of this class are immutable.
+ *
+ * @param <K> the dataset key type.
  */
-public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
+public class StandardPieURLGenerator<K extends Comparable<K>> implements PieURLGenerator<K>, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 1626966402065883419L;
@@ -115,8 +117,7 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
      * @return A string containing the generated URL.
      */
     @Override
-    public String generateURL(PieDataset dataset, Comparable key,
-            int pieIndex) {
+    public String generateURL(PieDataset<K> dataset, K key, int pieIndex) {
         String url = this.prefix;
         try {
             if (url.contains("?")) {
@@ -150,7 +151,7 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
         if (!(obj instanceof StandardPieURLGenerator)) {
             return false;
         }
-        StandardPieURLGenerator that = (StandardPieURLGenerator) obj;
+        StandardPieURLGenerator<K> that = (StandardPieURLGenerator<K>) obj;
         if (!this.prefix.equals(that.prefix)) {
             return false;
         }

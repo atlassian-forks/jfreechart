@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * --------------------
  * HMSNumberFormat.java
  * --------------------
- * (C) Copyright 2013-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2013-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -43,19 +43,20 @@ import java.text.ParsePosition;
 
 /**
  * A custom number formatter that formats numbers (in seconds) as HH:MM:SS.
- * Created in response to:
- * 
- * http://stackoverflow.com/questions/19028908/jfreechart-need-to-customize-y-axis-just-for-printing
+ * Created in response to
+ * <a href="http://stackoverflow.com/questions/19028908/jfreechart-need-to-customize-y-axis-just-for-printing">this question</a>
+ * on Stack Overflow.
  */
 public class HMSNumberFormat extends NumberFormat {
 
+    /** The formatter. */
     private final NumberFormat formatter = new DecimalFormat("00");
     
     /**
      * Creates a new instance.
      */
     public HMSNumberFormat() {
-        // nothing to do
+        super();
     }
 
     /**

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------
  * Hour.java
  * ---------
- * (C) Copyright 2001-2022, by David Gilbert.
+ * (C) Copyright 2001-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -59,10 +59,10 @@ public class Hour extends RegularTimePeriod implements Serializable {
     public static final int LAST_HOUR_IN_DAY = 23;
 
     /** The day. */
-    private Day day;
+    private final Day day;
 
     /** The hour. */
-    private byte hour;
+    private final byte hour;
 
     /** The first millisecond. */
     private long firstMillisecond;
@@ -88,6 +88,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @param day  the day ({@code null} not permitted).
      */
     public Hour(int hour, Day day) {
+        super();
         Args.nullNotPermitted(day, "day");
         this.hour = (byte) hour;
         this.day = day;
@@ -133,6 +134,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @since 1.0.13
      */
     public Hour(Date time, TimeZone zone, Locale locale) {
+        super();
         Args.nullNotPermitted(time, "time");
         Args.nullNotPermitted(zone, "zone");
         Args.nullNotPermitted(locale, "locale");
@@ -152,6 +154,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @param calendar the calendar to use for calculations ({@code null} not permitted).
      */
     public Hour(Date time, Calendar calendar) {
+        super();
         Args.nullNotPermitted(time, "time");
         Args.nullNotPermitted(calendar, "calendar");
         calendar.setTime(time);
@@ -412,7 +415,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
     /**
      * Returns an integer indicating the order of this Hour object relative to
      * the specified object:
-     *
+     * <p>
      * negative == before, zero == same, positive == after.
      *
      * @param o1  the object to compare.
@@ -420,7 +423,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @return negative == before, zero == same, positive == after.
      */
     @Override
-    public int compareTo(Object o1) {
+    public int compareTo(TimePeriod o1) {
         int result;
 
         // CASE 1 : Comparing to another Hour object
@@ -467,9 +470,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
         String daystr = s.substring(0, Math.min(10, s.length()));
         Day day = Day.parseDay(daystr);
         if (day != null) {
-            String hourstr = s.substring(
-                Math.min(daystr.length() + 1, s.length()), s.length()
-            );
+            String hourstr = s.substring(Math.min(daystr.length() + 1, s.length()));
             hourstr = hourstr.trim();
             int hour = Integer.parseInt(hourstr);
             // if the hour is 0 - 23 then create an hour

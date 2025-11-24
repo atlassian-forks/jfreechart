@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ----------------
  * OutlierList.java
  * ----------------
- * (C) Copyright 2003-2020, by David Browning and Contributors.
+ * (C) Copyright 2003-present, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
@@ -64,7 +64,7 @@ public class OutlierList {
     private Outlier averagedOutlier;
 
     /**
-     * A flag that indicates whether or not there are multiple outliers in the
+     * A flag that indicates whether there are multiple outliers in the
      * list.
      */
     private boolean multiple = false;
@@ -128,7 +128,7 @@ public class OutlierList {
     }
 
     /**
-     * Sets the flag that indicates whether or not this list represents
+     * Sets the flag that indicates whether this list represents
      * multiple outliers.
      *
      * @param multiple  the flag.

@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * -----------
  * XYPlot.java
  * -----------
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Craig MacFarlane;
@@ -232,7 +232,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     private transient Paint rangeMinorGridlinePaint;
 
     /**
-     * A flag that controls whether or not the zero baseline against the domain
+     * A flag that controls whether the zero baseline against the domain
      * axis is visible.
      */
     private boolean domainZeroBaselineVisible;
@@ -248,7 +248,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     private transient Paint domainZeroBaselinePaint;
 
     /**
-     * A flag that controls whether or not the zero baseline against the range
+     * A flag that controls whether the zero baseline against the range
      * axis is visible.
      */
     private boolean rangeZeroBaselineVisible;
@@ -259,7 +259,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     /** The paint used for the zero baseline against the range axis. */
     private transient Paint rangeZeroBaselinePaint;
 
-    /** A flag that controls whether or not a domain crosshair is drawn..*/
+    /** A flag that controls whether a domain crosshair is drawn.*/
     private boolean domainCrosshairVisible;
 
     /** The domain crosshair value. */
@@ -272,12 +272,12 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     private transient Paint domainCrosshairPaint;
 
     /**
-     * A flag that controls whether or not the crosshair locks onto actual
+     * A flag that controls whether the crosshair locks onto actual
      * data points.
      */
     private boolean domainCrosshairLockedOnData = true;
 
-    /** A flag that controls whether or not a range crosshair is drawn..*/
+    /** A flag that controls whether a range crosshair is drawn.*/
     private boolean rangeCrosshairVisible;
 
     /** The range crosshair value. */
@@ -290,7 +290,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     private transient Paint rangeCrosshairPaint;
 
     /**
-     * A flag that controls whether or not the crosshair locks onto actual
+     * A flag that controls whether the crosshair locks onto actual
      * data points.
      */
     private boolean rangeCrosshairLockedOnData = true;
@@ -353,13 +353,13 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     private LegendItemCollection fixedLegendItems;
 
     /**
-     * A flag that controls whether or not panning is enabled for the domain
+     * A flag that controls whether panning is enabled for the domain
      * axis/axes.
      */
     private boolean domainPannable;
 
     /**
-     * A flag that controls whether or not panning is enabled for the range
+     * A flag that controls whether panning is enabled for the range
      * axis/axes.
      */
     private boolean rangePannable;
@@ -575,7 +575,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             Plot parent = getParent();
             if (parent instanceof XYPlot) {
                 @SuppressWarnings("unchecked")
-                XYPlot<S> xy = (XYPlot) parent;
+                XYPlot<S> xy = (XYPlot<S>) parent;
                 result = xy.getDomainAxis(index);
             }
         }
@@ -713,8 +713,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getOrientation()
      */
     public RectangleEdge getDomainAxisEdge() {
-        return Plot.resolveDomainAxisLocation(getDomainAxisLocation(),
-                this.orientation);
+        return Plot.resolveDomainAxisLocation(getDomainAxisLocation(), this.orientation);
     }
 
     /**
@@ -914,8 +913,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getOrientation()
      */
     public RectangleEdge getRangeAxisEdge() {
-        return Plot.resolveRangeAxisLocation(getRangeAxisLocation(),
-                this.orientation);
+        return Plot.resolveRangeAxisLocation(getRangeAxisLocation(), this.orientation);
     }
 
     /**
@@ -934,7 +932,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             Plot parent = getParent();
             if (parent instanceof XYPlot) {
                 @SuppressWarnings("unchecked")
-                XYPlot<S> xy = (XYPlot) parent;
+                XYPlot<S> xy = (XYPlot<S>) parent;
                 result = xy.getRangeAxis(index);
             }
         }
@@ -1156,7 +1154,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * 
      * @since 1.5.4
      */
-    public Map<Integer, XYDataset> getDatasets() {
+    public Map<Integer, XYDataset<S>> getDatasets() {
         return Collections.unmodifiableMap(this.datasets);
     }
 
@@ -1561,7 +1559,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Sets the flag that controls whether or not the domain grid-lines are
+     * Sets the flag that controls whether the domain grid-lines are
      * visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -1591,7 +1589,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Sets the flag that controls whether or not the domain minor grid-lines
+     * Sets the flag that controls whether the domain minor grid-lines
      * are visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -1726,7 +1724,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Sets the flag that controls whether or not the range axis grid lines
+     * Sets the flag that controls whether the range axis grid lines
      * are visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -1808,7 +1806,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Sets the flag that controls whether or not the range axis minor grid
+     * Sets the flag that controls whether the range axis minor grid
      * lines are visible.
      * <p>
      * If the flag value is changed, a {@link PlotChangeEvent} is sent to all
@@ -1878,7 +1876,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Returns a flag that controls whether or not a zero baseline is
+     * Returns a flag that controls whether a zero baseline is
      * displayed for the domain axis.
      *
      * @return A boolean.
@@ -1890,7 +1888,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Sets the flag that controls whether or not the zero baseline is
+     * Sets the flag that controls whether the zero baseline is
      * displayed for the domain axis, and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
@@ -1955,7 +1953,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Returns a flag that controls whether or not a zero baseline is
+     * Returns a flag that controls whether a zero baseline is
      * displayed for the range axis.
      *
      * @return A boolean.
@@ -1967,7 +1965,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Sets the flag that controls whether or not the zero baseline is
+     * Sets the flag that controls whether the zero baseline is
      * displayed for the range axis, and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
@@ -2263,21 +2261,11 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             boolean notify) {
         Args.nullNotPermitted(marker, "marker");
         Args.nullNotPermitted(layer, "layer");
-        List<Marker> markers;
         if (layer == Layer.FOREGROUND) {
-            markers = this.foregroundDomainMarkers.get(index);
-            if (markers == null) {
-                markers = new ArrayList<>();
-                this.foregroundDomainMarkers.put(index, markers);
-            }
+            List<Marker> markers = this.foregroundDomainMarkers.computeIfAbsent(index, k -> new ArrayList<>());
             markers.add(marker);
-        }
-        else if (layer == Layer.BACKGROUND) {
-            markers = this.backgroundDomainMarkers.get(index);
-            if (markers == null) {
-                markers = new ArrayList<>();
-                this.backgroundDomainMarkers.put(index, markers);
-            }
+        } else if (layer == Layer.BACKGROUND) {
+            List<Marker> markers = this.backgroundDomainMarkers.computeIfAbsent(index, k -> new ArrayList<>());
             markers.add(marker);
         }
         marker.addChangeListener(this);
@@ -2292,7 +2280,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      *
      * @param marker  the marker.
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(Marker marker) {
@@ -2306,7 +2294,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(Marker marker, Layer layer) {
@@ -2321,7 +2309,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @param marker the marker.
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer) {
@@ -2337,7 +2325,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @param layer  the layer (foreground or background).
      * @param notify  notify listeners?
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer,
@@ -2445,21 +2433,11 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      */
     public void addRangeMarker(int index, Marker marker, Layer layer,
             boolean notify) {
-        List<Marker> markers;
         if (layer == Layer.FOREGROUND) {
-            markers = this.foregroundRangeMarkers.get(index);
-            if (markers == null) {
-                markers = new ArrayList<>();
-                this.foregroundRangeMarkers.put(index, markers);
-            }
+            List<Marker> markers = this.foregroundRangeMarkers.computeIfAbsent(index, k -> new ArrayList<>());
             markers.add(marker);
-        }
-        else if (layer == Layer.BACKGROUND) {
-            markers = this.backgroundRangeMarkers.get(index);
-            if (markers == null) {
-                markers = new ArrayList<>();
-                this.backgroundRangeMarkers.put(index, markers);
-            }
+        } else if (layer == Layer.BACKGROUND) {
+            List<Marker> markers = this.backgroundRangeMarkers.computeIfAbsent(index, k -> new ArrayList<>());
             markers.add(marker);
         }
         marker.addChangeListener(this);
@@ -2502,7 +2480,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      *
      * @param marker the marker.
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeRangeMarker(Marker marker) {
@@ -2516,7 +2494,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeRangeMarker(Marker marker, Layer layer) {
@@ -2531,7 +2509,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer) {
@@ -2547,7 +2525,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @param layer  the layer (foreground or background) ({@code null} not permitted).
      * @param notify  notify listeners?
      *
-     * @return A boolean indicating whether or not the marker was actually
+     * @return A boolean indicating whether the marker was actually
      *         removed.
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer,
@@ -2605,7 +2583,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      *
      * @param annotation  the annotation ({@code null} not permitted).
      *
-     * @return A boolean (indicates whether or not the annotation was removed).
+     * @return A boolean (indicates whether the annotation was removed).
      *
      * @see #addAnnotation(XYAnnotation)
      * @see #getAnnotations()
@@ -2621,7 +2599,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @param annotation  the annotation ({@code null} not permitted).
      * @param notify  notify listeners?
      *
-     * @return A boolean (indicates whether or not the annotation was removed).
+     * @return A boolean (indicates whether the annotation was removed).
      */
     public boolean removeAnnotation(XYAnnotation annotation, boolean notify) {
         Args.nullNotPermitted(annotation, "annotation");
@@ -2725,8 +2703,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
                 space.ensureAtLeast(this.fixedDomainAxisSpace.getBottom(),
                         RectangleEdge.BOTTOM);
             }
-        }
-        else {
+        } else {
             // reserve space for the domain axes...
             for (ValueAxis axis: this.domainAxes.values()) {
                 if (axis != null) {
@@ -2738,7 +2715,6 @@ public class XYPlot<S extends Comparable<S>> extends Plot
         }
 
         return space;
-
     }
 
     /**
@@ -2752,7 +2728,6 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      */
     protected AxisSpace calculateRangeAxisSpace(Graphics2D g2, 
             Rectangle2D plotArea, AxisSpace space) {
-
         if (space == null) {
             space = new AxisSpace();
         }
@@ -2771,8 +2746,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
                 space.ensureAtLeast(this.fixedRangeAxisSpace.getRight(),
                         RectangleEdge.RIGHT);
             }
-        }
-        else {
+        } else {
             // reserve space for the range axes...
             for (ValueAxis axis: this.rangeAxes.values()) {
                 if (axis != null) {
@@ -2783,7 +2757,6 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             }
         }
         return space;
-
     }
 
     /**
@@ -2846,9 +2819,8 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             PlotState parentState, PlotRenderingInfo info) {
 
         // if the plot area is too small, just return...
-        boolean b1 = (area.getWidth() <= MINIMUM_WIDTH_TO_DRAW);
-        boolean b2 = (area.getHeight() <= MINIMUM_HEIGHT_TO_DRAW);
-        if (b1 || b2) {
+        if ((area.getWidth() <= MINIMUM_WIDTH_TO_DRAW)
+                || (area.getHeight() <= MINIMUM_HEIGHT_TO_DRAW)) {
             return;
         }
 
@@ -3573,8 +3545,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
                 }
                 XYItemRenderer r = getRenderer();
                 if ((r instanceof AbstractXYItemRenderer) && paintLine) {
-                    ((AbstractXYItemRenderer) r).drawDomainLine(g2, this,
-                            getDomainAxis(), dataArea, tick.getValue(),
+                    r.drawDomainLine(g2, this, getDomainAxis(), dataArea, tick.getValue(),
                             gridPaint, gridStroke);
                 }
             }
@@ -3629,7 +3600,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Draws a base line across the chart at value zero on the domain axis.
+     * Draws a baseline across the chart at value zero on the domain axis.
      *
      * @param g2  the graphics device.
      * @param area  the data area.
@@ -3645,7 +3616,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Draws a base line across the chart at value zero on the range axis.
+     * Draws a baseline across the chart at value zero on the range axis.
      *
      * @param g2  the graphics device.
      * @param area  the data area.
@@ -4048,7 +4019,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             Plot parent = getParent();
             if (parent instanceof XYPlot) {
                 @SuppressWarnings("unchecked")
-                XYPlot<S> p = (XYPlot) parent;
+                XYPlot<S> p = (XYPlot<S>) parent;
                 result = p.getDomainAxisIndex(axis);
             }
         }
@@ -4080,7 +4051,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             Plot parent = getParent();
             if (parent instanceof XYPlot) {
                 @SuppressWarnings("unchecked")
-                XYPlot<S> p = (XYPlot) parent;
+                XYPlot<S> p = (XYPlot<S>) parent;
                 result = p.getRangeAxisIndex(axis);
             }
         }
@@ -4242,7 +4213,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Returns a flag indicating whether or not the domain crosshair is visible.
+     * Returns a flag indicating whether the domain crosshair is visible.
      *
      * @return The flag.
      *
@@ -4253,7 +4224,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Sets the flag indicating whether or not the domain crosshair is visible
+     * Sets the flag indicating whether the domain crosshair is visible
      * and, if the flag changes, sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
@@ -4269,7 +4240,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Returns a flag indicating whether or not the crosshair should "lock-on"
+     * Returns a flag indicating whether the crosshair should "lock-on"
      * to actual data values.
      *
      * @return The flag.
@@ -4281,7 +4252,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Sets the flag indicating whether or not the domain crosshair should
+     * Sets the flag indicating whether the domain crosshair should
      * "lock-on" to actual data values.  If the flag value changes, this
      * method sends a {@link PlotChangeEvent} to all registered listeners.
      *
@@ -4391,7 +4362,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Returns a flag indicating whether or not the range crosshair is visible.
+     * Returns a flag indicating whether the range crosshair is visible.
      *
      * @return The flag.
      *
@@ -4403,7 +4374,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Sets the flag indicating whether or not the range crosshair is visible.
+     * Sets the flag indicating whether the range crosshair is visible.
      * If the flag value changes, this method sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
@@ -4419,7 +4390,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Returns a flag indicating whether or not the crosshair should "lock-on"
+     * Returns a flag indicating whether the crosshair should "lock-on"
      * to actual data values.
      *
      * @return The flag.
@@ -4431,7 +4402,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
-     * Sets the flag indicating whether or not the range crosshair should
+     * Sets the flag indicating whether the range crosshair should
      * "lock-on" to actual data values.  If the flag value changes, this method
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
@@ -4476,7 +4447,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * all registered listeners, but only if the crosshair is visible.
      *
      * @param value  the new value.
-     * @param notify  a flag that controls whether or not listeners are
+     * @param notify  a flag that controls whether listeners are
      *                notified.
      *
      * @see #getRangeCrosshairValue()
@@ -4807,7 +4778,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @param factor  the zoom factor.
      * @param info  the plot rendering info.
      * @param source  the source point.
-     * @param useAnchor  a flag that controls whether or not the source point
+     * @param useAnchor  a flag that controls whether the source point
      *         is used for the zoom anchor.
      *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)
@@ -4977,7 +4948,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             return false;
         }
         @SuppressWarnings("unchecked")
-        XYPlot<S> that = (XYPlot) obj;
+        XYPlot<S> that = (XYPlot<S>) obj;
         if (this.weight != that.weight) {
             return false;
         }
@@ -5191,16 +5162,12 @@ public class XYPlot<S extends Comparable<S>> extends Plot
         hash = 43 * hash + Objects.hashCode(this.rangeZeroBaselineStroke);
         hash = 43 * hash + Objects.hashCode(this.rangeZeroBaselinePaint);
         hash = 43 * hash + (this.domainCrosshairVisible ? 1 : 0);
-        hash = 43 * hash +
-                (int) (Double.doubleToLongBits(this.domainCrosshairValue) ^
-                (Double.doubleToLongBits(this.domainCrosshairValue) >>> 32));
+        hash = 43 * hash + Long.hashCode(Double.doubleToLongBits(this.domainCrosshairValue));
         hash = 43 * hash + Objects.hashCode(this.domainCrosshairStroke);
         hash = 43 * hash + Objects.hashCode(this.domainCrosshairPaint);
         hash = 43 * hash + (this.domainCrosshairLockedOnData ? 1 : 0);
         hash = 43 * hash + (this.rangeCrosshairVisible ? 1 : 0);
-        hash = 43 * hash +
-                (int) (Double.doubleToLongBits(this.rangeCrosshairValue) ^
-                (Double.doubleToLongBits(this.rangeCrosshairValue) >>> 32));
+        hash = 43 * hash + Long.hashCode(Double.doubleToLongBits(this.rangeCrosshairValue));
         hash = 43 * hash + Objects.hashCode(this.rangeCrosshairStroke);
         hash = 43 * hash + Objects.hashCode(this.rangeCrosshairPaint);
         hash = 43 * hash + (this.rangeCrosshairLockedOnData ? 1 : 0);
@@ -5228,7 +5195,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     @Override
     public Object clone() throws CloneNotSupportedException {
         @SuppressWarnings("unchecked")
-        XYPlot<S> clone = (XYPlot) super.clone();
+        XYPlot<S> clone = (XYPlot<S>) super.clone();
         clone.domainAxes = CloneUtils.cloneMapValues(this.domainAxes);
         for (ValueAxis axis : clone.domainAxes.values()) {
             if (axis != null) {

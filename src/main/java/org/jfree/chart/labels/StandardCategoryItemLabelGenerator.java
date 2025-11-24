@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * ---------------------------------------
  * StandardCategoryItemLabelGenerator.java
  * ---------------------------------------
- * (C) Copyright 2004-2022, by David Gilbert.
+ * (C) Copyright 2004-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -46,10 +46,13 @@ import org.jfree.data.category.CategoryDataset;
 /**
  * A standard label generator that can be used with a
  * {@link org.jfree.chart.renderer.category.CategoryItemRenderer}.
+ *
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  */
-public class StandardCategoryItemLabelGenerator
-    extends AbstractCategoryItemLabelGenerator
-    implements CategoryItemLabelGenerator, Cloneable, PublicCloneable,
+public class StandardCategoryItemLabelGenerator<R extends Comparable<R>, C extends Comparable<C>>
+    extends AbstractCategoryItemLabelGenerator<R, C>
+    implements CategoryItemLabelGenerator<R, C>, Cloneable, PublicCloneable,
                Serializable {
 
     /** For serialization. */
@@ -115,7 +118,7 @@ public class StandardCategoryItemLabelGenerator
      * @return The label (possibly {@code null}).
      */
     @Override
-    public String generateLabel(CategoryDataset dataset, int row, int column) {
+    public String generateLabel(CategoryDataset<R, C> dataset, int row, int column) {
         return generateLabelString(dataset, row, column);
     }
 
@@ -139,8 +142,12 @@ public class StandardCategoryItemLabelGenerator
     }
 
     @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 3;
-        return hash;
+        return super.hashCode();
     }
 }

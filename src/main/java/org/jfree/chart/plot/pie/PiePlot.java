@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -167,13 +167,13 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     private transient Paint defaultSectionPaint;
 
     /**
-     * A flag that controls whether or not the section paint is auto-populated
+     * A flag that controls whether the section paint is auto-populated
      * from the drawing supplier.
      */
     private boolean autoPopulateSectionPaint;
 
     /**
-     * A flag that controls whether or not an outline is drawn for each
+     * A flag that controls whether an outline is drawn for each
      * section in the plot.
      */
     private boolean sectionOutlinesVisible;
@@ -185,7 +185,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     private transient Paint defaultSectionOutlinePaint;
 
     /**
-     * A flag that controls whether or not the section outline paint is
+     * A flag that controls whether the section outline paint is
      * auto-populated from the drawing supplier.
      */
     private boolean autoPopulateSectionOutlinePaint;
@@ -197,7 +197,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     private transient Stroke defaultSectionOutlineStroke;
 
     /**
-     * A flag that controls whether or not the section outline stroke is
+     * A flag that controls whether the section outline stroke is
      * auto-populated from the drawing supplier.
      */
     private boolean autoPopulateSectionOutlineStroke;
@@ -272,7 +272,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      */
     private double labelGap = 0.025;
 
-    /** A flag that controls whether or not the label links are drawn. */
+    /** A flag that controls whether the label links are drawn. */
     private boolean labelLinksVisible;
 
     /**
@@ -304,7 +304,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     private PieSectionLabelGenerator legendLabelGenerator;
 
     /** A tool tip generator for the legend. */
-    private PieSectionLabelGenerator legendLabelToolTipGenerator;
+    private PieSectionLabelGenerator<K> legendLabelToolTipGenerator;
 
     /**
      * A URL generator for the legend items (optional).
@@ -329,7 +329,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * various Java implementations that causes the JVM to crash).  See this
      * link for details:
      *
-     * http://www.jfree.org/phpBB2/viewtopic.php?t=2707
+     * https://www.jfree.org/phpBB2/viewtopic.php?t=2707
      *
      * ...and this bug report in the Java Bug Parade:
      *
@@ -347,21 +347,21 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
             = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
 
     /**
-     * This debug flag controls whether or not an outline is drawn showing the
+     * This debug flag controls whether an outline is drawn showing the
      * interior of the plot region.  This is drawn as a lightGray rectangle
      * showing the padding provided by the 'interiorGap' setting.
      */
     static final boolean DEBUG_DRAW_INTERIOR = false;
 
     /**
-     * This debug flag controls whether or not an outline is drawn showing the
+     * This debug flag controls whether an outline is drawn showing the
      * link area (in blue) and link ellipse (in yellow).  This controls where
      * the label links have 'elbow' points.
      */
     static final boolean DEBUG_DRAW_LINK_AREA = false;
 
     /**
-     * This debug flag controls whether or not an outline is drawn showing
+     * This debug flag controls whether an outline is drawn showing
      * the pie area (in green).
      */
     static final boolean DEBUG_DRAW_PIE_AREA = false;
@@ -641,7 +641,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     /**
      * Sets a flag that controls whether {@code null} values are ignored,
      * and sends a {@link PlotChangeEvent} to all registered listeners.  At
-     * present, this only affects whether or not the key is presented in the
+     * present, this only affects whether the key is presented in the
      * legend.
      *
      * @param flag  the flag.
@@ -669,7 +669,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     /**
      * Sets a flag that controls whether zero values are ignored,
      * and sends a {@link PlotChangeEvent} to all registered listeners.  This
-     * only affects whether or not a label appears for the non-visible
+     * only affects whether a label appears for the non-visible
      * pie section.
      *
      * @param flag  the flag.
@@ -839,7 +839,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Returns the flag that controls whether or not the section paint is
+     * Returns the flag that controls whether the section paint is
      * auto-populated by the {@link #lookupSectionPaint(K)} method.
      *
      * @return A boolean.
@@ -849,7 +849,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the flag that controls whether or not the section paint is
+     * Sets the flag that controls whether the section paint is
      * auto-populated by the {@link #lookupSectionPaint(K)} method,
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
@@ -863,10 +863,10 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     //// SECTION OUTLINE PAINT ////////////////////////////////////////////////
 
     /**
-     * Returns the flag that controls whether or not the outline is drawn for
+     * Returns the flag that controls whether the outline is drawn for
      * each pie section.
      *
-     * @return The flag that controls whether or not the outline is drawn for
+     * @return The flag that controls whether the outline is drawn for
      *         each pie section.
      *
      * @see #setSectionOutlinesVisible(boolean)
@@ -876,7 +876,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the flag that controls whether or not the outline is drawn for
+     * Sets the flag that controls whether the outline is drawn for
      * each pie section, and sends a {@link PlotChangeEvent} to all registered
      * listeners.
      *
@@ -1022,7 +1022,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Returns the flag that controls whether or not the section outline paint
+     * Returns the flag that controls whether the section outline paint
      * is auto-populated by the {@link #lookupSectionOutlinePaint(K)}
      * method.
      *
@@ -1033,7 +1033,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the flag that controls whether or not the section outline paint is
+     * Sets the flag that controls whether the section outline paint is
      * auto-populated by the {@link #lookupSectionOutlinePaint(K)}
      * method, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
@@ -1181,7 +1181,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Returns the flag that controls whether or not the section outline stroke
+     * Returns the flag that controls whether the section outline stroke
      * is auto-populated by the {@link #lookupSectionOutlinePaint(K)}
      * method.
      *
@@ -1192,7 +1192,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the flag that controls whether or not the section outline stroke is
+     * Sets the flag that controls whether the section outline stroke is
      * auto-populated by the {@link #lookupSectionOutlineStroke(K)}
      * method, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
@@ -1411,7 +1411,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Returns the flag that controls whether or not label linking lines are
+     * Returns the flag that controls whether label linking lines are
      * visible.
      *
      * @return A boolean.
@@ -1423,7 +1423,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     }
 
     /**
-     * Sets the flag that controls whether or not label linking lines are
+     * Sets the flag that controls whether label linking lines are
      * visible and sends a {@link PlotChangeEvent} to all registered listeners.
      * Please take care when hiding the linking lines - depending on the data
      * values, the labels can be displayed some distance away from the
@@ -1861,8 +1861,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * angle smaller than this are not drawn, to avoid a JDK bug.  See this
      * link for details:
      * <br><br>
-     * <a href="http://www.jfree.org/phpBB2/viewtopic.php?t=2707">
-     * http://www.jfree.org/phpBB2/viewtopic.php?t=2707</a>
+     * <a href="https://www.jfree.org/phpBB2/viewtopic.php?t=2707">
+     * https://www.jfree.org/phpBB2/viewtopic.php?t=2707</a>
      * <br><br>
      * ...and this bug report in the Java Bug Parade:
      * <br><br>
@@ -1935,7 +1935,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @see #setLegendLabelToolTipGenerator(PieSectionLabelGenerator)
      */
-    public PieSectionLabelGenerator getLegendLabelToolTipGenerator() {
+    public PieSectionLabelGenerator<K> getLegendLabelToolTipGenerator() {
         return this.legendLabelToolTipGenerator;
     }
 

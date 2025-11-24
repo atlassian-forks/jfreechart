@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,11 +27,10 @@
  * ---------------------
  * XYIntervalSeries.java
  * ---------------------
- * (C) Copyright 2006-2022, by David Gilbert.
+ * (C) Copyright 2006-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xy;
@@ -43,7 +42,7 @@ import org.jfree.data.general.SeriesChangeEvent;
 /**
  * A list of (x, x-low, x-high, y, y-low, y-high) data items.
  *
- * @since 1.0.3
+ * @param <S> the series key type.
  *
  * @see XYIntervalSeriesCollection
  */
@@ -63,10 +62,10 @@ public class XYIntervalSeries<S extends Comparable<S>>
 
     /**
      * Constructs a new xy-series that contains no data.  You can specify
-     * whether or not duplicate x-values are allowed for the series.
+     * whether duplicate x-values are allowed for the series.
      *
      * @param key  the series key ({@code null} not permitted).
-     * @param autoSort  a flag that controls whether or not the items in the
+     * @param autoSort  a flag that controls whether the items in the
      *                  series are sorted.
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.

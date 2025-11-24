@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -46,7 +46,7 @@ import java.io.Serializable;
 
 /**
  * A strategy for zooming plots on the chart panel by selecting a smaller region on the initial screen.
- *
+ * <br><br>
  * See {@link ChartPanel#setSelectionZoomStrategy(SelectionZoomStrategy)}
  */
 public interface SelectionZoomStrategy extends Serializable {
@@ -61,11 +61,18 @@ public interface SelectionZoomStrategy extends Serializable {
 
     /**
      * The zoom rectangle starting point (selected by the user with a mouse
-     * click).  This is a point on the screen, not the chart (which may have
-     * been scaled up or down to fit the panel).
+     * click).  This is a point on the screen, not the chart which may have
+     * been scaled up or down to fit the panel.
+     *
+     * @return The zoom point.
      */
     Point2D getZoomPoint();
 
+    /**
+     * Sets the zoom starting point.
+     *
+     * @param zoomPoint the zoom starting point.
+     */
     void setZoomPoint(Point2D zoomPoint);
 
     /**
@@ -125,7 +132,7 @@ public interface SelectionZoomStrategy extends Serializable {
     void setZoomFillPaint(Paint paint);
 
     /**
-     * Returns the flag that controls whether or not the zoom rectangle is
+     * Returns the flag that controls whether the zoom rectangle is
      * filled when drawn.
      *
      * @return A boolean.

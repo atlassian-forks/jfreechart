@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,11 +27,10 @@
  * -----------------
  * XYDomainInfo.java
  * -----------------
- * (C) Copyright 2009-2022, by David Gilbert.
+ * (C) Copyright 2009-present, by David Gilbert.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
  */
 
 package org.jfree.data.xy;
@@ -42,6 +41,8 @@ import org.jfree.data.Range;
 /**
  * An interface that can (optionally) be implemented by a dataset to assist in
  * determining the minimum and maximum x-values in the dataset.
+ *
+ * @param <S> the series key type.
  */
 public interface XYDomainInfo<S extends Comparable<S>> {
 
@@ -49,7 +50,7 @@ public interface XYDomainInfo<S extends Comparable<S>> {
      * Returns the range of the values in this dataset's domain.
      *
      * @param visibleSeriesKeys  the keys of the visible series.
-     * @param includeInterval  a flag that determines whether or not the
+     * @param includeInterval  a flag that determines whether the
      *                         y-interval is taken into account.
      *
      * @return The range (or {@code null} if the dataset contains no

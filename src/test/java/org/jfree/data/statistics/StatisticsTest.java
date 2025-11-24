@@ -1,10 +1,10 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
+/* ======================================================
+ * JFreeChart : a chart library for the Java(tm) platform
+ * ======================================================
  *
- * (C) Copyright 2000-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2000-present, by David Gilbert and Contributors.
  *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
+ * Project Info:  https://www.jfree.org/jfreechart/index.html
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@
  * -------------------
  * StatisticsTest.java
  * -------------------
- * (C) Copyright 2004-2022, by David Gilbert and Contributors.
+ * (C) Copyright 2004-present, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -115,7 +115,7 @@ public class StatisticsTest {
         // try a null collection
         boolean pass = false;
         try {
-            Statistics.calculateMean((Collection) null);
+            Statistics.calculateMean((Collection<Number>) null);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -124,7 +124,7 @@ public class StatisticsTest {
 
         pass = false;
         try {
-            Statistics.calculateMean((Collection) null, false);
+            Statistics.calculateMean((Collection<Number>) null, false);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -353,8 +353,8 @@ public class StatisticsTest {
 
     /**
      * A simple test for the correlation calculation.
-     *
-     * http://trochim.human.cornell.edu/kb/statcorr.htm
+     * <p>
+     * <a href="http://trochim.human.cornell.edu/kb/statcorr.htm">http://trochim.human.cornell.edu/kb/statcorr.htm</a>
      */
     @Test
     public void testCorrelation2() {
